@@ -1,0 +1,3 @@
+include ':collect'
+include ':app'
+rootProject.name = "DataCollect"
