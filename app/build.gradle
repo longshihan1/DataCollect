@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.longshihan.datacollect"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 

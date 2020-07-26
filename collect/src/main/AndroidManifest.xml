@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.longshihan.collect">
-
+    package="com.longshihan.collect">
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <application>
+        <activity android:name=".control.SettingActivity"></activity>
+
         <provider
-                android:name=".provider.TraceLocationProvider"
-                android:authorities="{applicationId}.traceProvider"
-                android:exported="false">
-        </provider>
+            android:name=".provider.TraceLocationProvider"
+            android:authorities="{applicationId}.traceProvider"
+            android:exported="false"></provider>
     </application>
 
 </manifest>

@@ -1,0 +1,59 @@
+package com.longshihan.collect.model;
+
+/**
+ * @author longshihan
+ * @time 2020/7/26
+ */
+public class TraceTimeInfo {
+    private String tag;//唯一标识符
+    private String methodName;
+    private long cost;
+    private String datetime;
+
+    public TraceTimeInfo() {
+    }
+
+    public TraceTimeInfo(String tag, String methodName, long cost, String datetime) {
+        this.tag = tag;
+        this.methodName = methodName;
+        this.cost = cost;
+        this.datetime = datetime;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public long getCost() {
+        return cost;
+    }
+
+    public TraceTimeInfo setCost(long cost) {
+        this.cost = cost;
+        return this;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public Object[] getObjects(){
+        return new Object[]{getTag(),getMethodName(),getCost(),getDatetime()};
+    }
+}
