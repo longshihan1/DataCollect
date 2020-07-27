@@ -1,6 +1,7 @@
 package com.longshihan.collect.http;
 
 import com.google.gson.Gson;
+import com.longshihan.collect.init.Config;
 import com.longshihan.collect.model.APP;
 import com.longshihan.collect.model.SaveTrace;
 
@@ -23,8 +24,8 @@ import java.net.URLDecoder;
  * @time 2020/7/26
  */
 public class HttpUtils {
-    static String testConnectUrl = "http://192.168.0.105:8080/testConnect";
-    static String saveDataUrl = "http://192.168.0.105:8080/saveAppInfo";
+    static String testConnectUrl = Config.INSTANCE.getHOST()+"/testConnect";
+    static String saveDataUrl =Config.INSTANCE.getHOST()+ "/saveAppInfo";
     public static APP testConnect() {
         try {
             URL url = new URL(testConnectUrl);

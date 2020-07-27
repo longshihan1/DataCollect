@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".control.SettingActivity">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+<EditText
+        android:id="@+id/edit_host"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+          android:layout_height="50dp"/>
+        <TextView
+                android:id="@+id/l_savehost"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
 
+        android:text="修改上传地址"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/l_testconnect"
         android:layout_width="match_parent"
