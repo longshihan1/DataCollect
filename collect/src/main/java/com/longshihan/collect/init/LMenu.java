@@ -77,4 +77,12 @@ public class LMenu extends LinearLayout {
             e.printStackTrace();
         }
     }
+
+    public void dismiss() {
+        try {
+            windowManager.removeView(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

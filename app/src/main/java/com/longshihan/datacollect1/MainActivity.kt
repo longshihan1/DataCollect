@@ -1,4 +1,4 @@
-package com.longshihan.datacollect
+package com.longshihan.datacollect1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

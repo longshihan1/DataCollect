@@ -24,11 +24,18 @@ import java.net.URLDecoder;
  * @time 2020/7/26
  */
 public class HttpUtils {
-    static String testConnectUrl = Config.INSTANCE.getHOST()+"/testConnect";
-    static String saveDataUrl =Config.INSTANCE.getHOST()+ "/saveAppInfo";
+
+
+    public static String testConnectUrl(){
+        return "http://"+Config.INSTANCE.getHOST()+":8080/testConnect";
+    }
+
+    public static String saveDataUrl(){
+        return "http://"+Config.INSTANCE.getHOST()+":8080/saveAppInfo";
+    }
     public static APP testConnect() {
         try {
-            URL url = new URL(testConnectUrl);
+            URL url = new URL(testConnectUrl());
             URLConnection connection = url.openConnection();
             //使用输入流
             InputStream is = connection.getInputStream();
@@ -53,7 +60,7 @@ public class HttpUtils {
         try {
             Gson gson = new Gson();
             String json=gson.toJson(saveTrace);
-            URL url = new URL(saveDataUrl);
+            URL url = new URL(saveDataUrl());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);

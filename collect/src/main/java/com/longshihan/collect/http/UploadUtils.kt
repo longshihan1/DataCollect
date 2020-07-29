@@ -6,22 +6,18 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import com.longshihan.collect.http.HttpUtils.saveTraceInfo
-import com.longshihan.collect.init.Utils.sdf
-import com.longshihan.collect.model.APP
 import com.longshihan.collect.model.SaveTrace
-import com.longshihan.collect.model.TraceTimeInfo
 import com.longshihan.collect.traceTime.TraceTime
-import java.util.*
-import kotlin.random.Random
+
 
 
 //先启动一个用户注册接口
 //单个接口上传数据，但是数据是整个系统收集，通过tag区分，按时间顺序序列化，本地不做缓存，上传区分用户信息
 object UploadUtils {
-    val mHandlerThread = HandlerThread("LDataCollect")
-    val loginWhat = 10001
-    val msgWhat = 10002
-    val deleyTime = 5000L
+  private  val mHandlerThread = HandlerThread("LDataCollect")
+   const val loginWhat = 10001
+    const val msgWhat = 10002
+    const val deleyTime = 5000L
     private lateinit var handler: WorkHandler
 
     fun init() {
@@ -59,7 +55,7 @@ object UploadUtils {
     }
 
 
-    class WorkHandler(looper: Looper, val uploadUtils: UploadUtils) : Handler(looper) {
+    class WorkHandler(looper: Looper,private val uploadUtils: UploadUtils) : Handler(looper) {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             when (msg.what) {
@@ -71,7 +67,6 @@ object UploadUtils {
                     sendEmptyMessageDelayed(10002, deleyTime)
                 }
             }
-
         }
     }
 

@@ -1,4 +1,4 @@
-package com.longshihan.datacollect
+package com.longshihan.datacollect1
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

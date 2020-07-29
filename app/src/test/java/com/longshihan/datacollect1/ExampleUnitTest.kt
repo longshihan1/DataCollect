@@ -1,4 +1,4 @@
-package com.longshihan.datacollect
+package com.longshihan.datacollect1
 
 import org.junit.Test
 

@@ -39,12 +39,15 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
-        count--;
+
     }
 
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
-
+        count--;
+        if (count==0){
+            TraceManager.getInstance().dimiss();
+        }
     }
 
     @Override

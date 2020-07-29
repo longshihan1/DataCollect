@@ -20,11 +20,12 @@ import java.io.File;
 public class TraceManager {
     private static TraceManager instance;
     private LMenu menu;
+    public static Context mContext;
 
     private TraceManager() {
     }
 
-    static TraceManager getInstance() {
+   public static TraceManager getInstance() {
         if (instance == null) {
             synchronized (TraceManager.class) {
                 if (instance == null) {
@@ -36,9 +37,16 @@ public class TraceManager {
     }
     public static void init(Context context){
         try {
+            mContext=context;
             Log.d("测试","进来了");
             //绑定生命周期
+            if (context instanceof Application){
+                Log.d("测试","进来了1");
             ((Application)context).registerActivityLifecycleCallbacks(new ActivityLifecycle());
+            }else {
+                Log.d("测试","进来了2");
+                TraceManager.getInstance().showMenu(context);
+            }
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();
@@ -77,6 +85,13 @@ public class TraceManager {
             return true;
         }
         return false;
+    }
+
+
+    public void dimiss(){
+        if (menu != null) {
+            menu.dismiss();
+        }
     }
     @TargetApi(Build.VERSION_CODES.M)
     private void requestPermission(Context context) {
