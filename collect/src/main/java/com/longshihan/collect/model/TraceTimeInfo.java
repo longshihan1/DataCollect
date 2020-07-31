@@ -9,15 +9,17 @@ public class TraceTimeInfo {
     private String methodName;
     private long cost;
     private String datetime;
+    private String threadName;
 
     public TraceTimeInfo() {
     }
 
-    public TraceTimeInfo(String tag, String methodName, long cost, String datetime) {
+    public TraceTimeInfo(String tag, String methodName, long cost, String datetime, String threadName) {
         this.tag = tag;
         this.methodName = methodName;
         this.cost = cost;
         this.datetime = datetime;
+        this.threadName = threadName;
     }
 
     public String getMethodName() {
@@ -55,5 +57,13 @@ public class TraceTimeInfo {
 
     public Object[] getObjects(){
         return new Object[]{getTag(),getMethodName(),getCost(),getDatetime()};
+    }
+
+    public String getThreadName() {
+        return threadName;
+    }
+
+    public void setThreadName(String threadName) {
+        this.threadName = threadName;
     }
 }

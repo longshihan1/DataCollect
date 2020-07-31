@@ -24,9 +24,8 @@ public class TraceTime {
         long currentTime=System.currentTimeMillis() - startTime;
 
         traceTimeInfos.add(new TraceTimeInfo(UUID.randomUUID().toString()
-                , clazzname + methodName,
-                currentTime
-                , Utils.sdf.format(System.currentTimeMillis())));
+                , clazzname +"."+ methodName, currentTime
+                , Utils.sdf.format(System.currentTimeMillis()), Thread.currentThread().getName()));
     }
 
 }
