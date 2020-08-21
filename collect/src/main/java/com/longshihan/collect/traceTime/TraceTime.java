@@ -12,12 +12,12 @@ public class TraceTime {
     public static List<TraceTimeInfo> traceTimeInfos = new ArrayList<>();
     public static Map<String, Long> sStartTime = new HashMap<>();
 
-    public static void saveFirst(String clazzname, String methodName) {
-        sStartTime.put(clazzname + methodName, System.currentTimeMillis());
+    public static void saveFirst(String clazzname, String methodName,String tag) {
+        sStartTime.put(tag, System.currentTimeMillis());
     }
 
-    public static void saveLast(String clazzname, String methodName) {
-        Long startTime = sStartTime.get(clazzname + methodName);
+    public static void saveLast(String clazzname, String methodName,String tag) {
+        Long startTime = sStartTime.get(tag);
         if (startTime==null){
             startTime=System.currentTimeMillis();
         }
