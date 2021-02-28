@@ -50,6 +50,7 @@ public class TraceManager {
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();
+            UploadUtils.uploadMsg();
             //轮训开启任务
             File file=context.getExternalCacheDir();
             if (!file.exists()){

@@ -28,6 +28,7 @@ object UploadUtils {
     fun startLogin() {
         handler.sendEmptyMessage(loginWhat)
     }
+    @JvmStatic
     fun uploadMsg() {
         handler.sendEmptyMessageDelayed(msgWhat, deleyTime)
 
