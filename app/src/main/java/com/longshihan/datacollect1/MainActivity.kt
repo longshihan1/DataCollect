@@ -1,7 +1,7 @@
 package com.longshihan.datacollect1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.longshihan.collect.http.UploadUtils
 import com.longshihan.collect.init.Trace

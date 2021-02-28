@@ -1,7 +1,7 @@
 package com.longshihan.collect.control
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.longshihan.collect.R
 import com.longshihan.collect.http.UploadUtils
 import com.longshihan.collect.init.Config
