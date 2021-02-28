@@ -17,12 +17,13 @@ class MainActivity : AppCompatActivity() {
             UploadUtils.uploadMsg()
         }
         addMethod.setOnClickListener {
-            Trace.initFirst(MainActivity::class.java.name, "onclick")
+            val tag:String= System.currentTimeMillis().toString()
+            Trace.initFirst(MainActivity::class.java.name, "onclick",tag)
             val count = Random(25).nextInt(10)
             for (index in 0..count) {
                 val text = TextView(this)
             }
-            Trace.initLast(MainActivity::class.java.name, "onclick")
+            Trace.initLast(MainActivity::class.java.name, "onclick",tag)
 
         }
     }
