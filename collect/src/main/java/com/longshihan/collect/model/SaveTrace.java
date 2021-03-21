@@ -1,7 +1,4 @@
 package com.longshihan.collect.model;
-
-import com.longshihan.collect.traceTime.TraceTime;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

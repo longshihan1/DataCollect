@@ -1,4 +1,4 @@
-package com.longshihan.collect.init;
+package com.longshihan.collect.control;
 
 import android.content.Context;
 import android.content.Intent;

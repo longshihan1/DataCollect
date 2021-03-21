@@ -10,7 +10,11 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
+import com.longshihan.collect.control.LMenu;
 import com.longshihan.collect.http.UploadUtils;
+import com.longshihan.collect.utils.FileUtils;
+import com.longshihan.collect.utils.SPUtils;
 
 import java.io.File;
 
@@ -25,7 +29,7 @@ public class TraceManager {
     private TraceManager() {
     }
 
-   public static TraceManager getInstance() {
+    public static TraceManager getInstance() {
         if (instance == null) {
             synchronized (TraceManager.class) {
                 if (instance == null) {
@@ -35,42 +39,45 @@ public class TraceManager {
         }
         return instance;
     }
-    public static void init(Context context){
+
+    public static void init(Context context) {
         try {
-            mContext=context;
-            Log.d("测试","进来了");
+            mContext = context;
+            Log.d("测试", "进来了");
             //绑定生命周期
-            if (context instanceof Application){
-                Log.d("测试","进来了1");
-            ((Application)context).registerActivityLifecycleCallbacks(new ActivityLifecycle());
-            }else {
-                Log.d("测试","进来了2");
+            if (context instanceof Application) {
+                Log.d("测试", "进来了1");
+                ((Application) context).registerActivityLifecycleCallbacks(new ActivityLifecycle());
+            } else {
+                Log.d("测试", "进来了2");
                 TraceManager.getInstance().showMenu(context);
             }
+            //初始化MMKV
+            SPUtils.init(mContext, FileUtils.CheckOtherDate());
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();
             UploadUtils.uploadMsg();
             //轮训开启任务
-            File file=context.getExternalCacheDir();
-            if (!file.exists()){
+            File file = context.getExternalCacheDir();
+            if (!file.exists()) {
                 file.mkdirs();
             }
-            Utils.timefilename=file.getAbsolutePath()+"/time-"+Utils.sdf.format(System.currentTimeMillis())+ ".txt";
-            File file1=new File(Utils.timefilename);
-            if (!file1.exists()){
+            Utils.timefilename = file.getAbsolutePath() + "/time-" + Utils.sdf.format(System.currentTimeMillis()) + ".txt";
+            File file1 = new File(Utils.timefilename);
+            if (!file1.exists()) {
                 file1.createNewFile();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public boolean showMenu(Context context) {
-        return showMenu(context,10);
+        return showMenu(context, 10);
     }
 
-    private boolean showMenu(Context context,int y) {
+    private boolean showMenu(Context context, int y) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(context)) {
                 requestPermission(context);
@@ -89,11 +96,12 @@ public class TraceManager {
     }
 
 
-    public void dimiss(){
+    public void dimiss() {
         if (menu != null) {
             menu.dismiss();
         }
     }
+
     @TargetApi(Build.VERSION_CODES.M)
     private void requestPermission(Context context) {
         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.getPackageName()));

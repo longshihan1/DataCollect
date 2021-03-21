@@ -6,7 +6,10 @@ import android.database.Cursor
 import android.net.Uri
 import com.longshihan.collect.init.TraceManager
 
-class TraceLocationProvider : ContentProvider() {
+/**
+ * 启动初始化
+ */
+class TraceStartUpProvider : ContentProvider() {
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         return 0

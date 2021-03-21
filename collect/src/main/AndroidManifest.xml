@@ -6,7 +6,7 @@
         <activity android:name=".control.SettingActivity"></activity>
 
         <provider
-            android:name=".provider.TraceLocationProvider"
+            android:name=".provider.TraceStartUpProvider"
             android:authorities="{applicationId}.traceProvider"
             android:exported="false"></provider>
     </application>

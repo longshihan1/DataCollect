@@ -56,10 +56,9 @@ public class HttpUtils {
         }
     }
 
-    public static APP saveTraceInfo(SaveTrace saveTrace) {
+    public static APP saveTraceInfo(String json) {
         try {
             Gson gson = new Gson();
-            String json=gson.toJson(saveTrace);
             URL url = new URL(saveDataUrl());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);

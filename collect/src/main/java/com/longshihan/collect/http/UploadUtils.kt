@@ -5,10 +5,11 @@ import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
 import android.util.Log
+import com.google.gson.Gson
 import com.longshihan.collect.http.HttpUtils.saveTraceInfo
 import com.longshihan.collect.model.SaveTrace
 import com.longshihan.collect.traceTime.TraceTime
-
+import com.longshihan.collect.utils.SPUtils
 
 
 //先启动一个用户注册接口
@@ -48,10 +49,13 @@ object UploadUtils {
         if (list.size==0){
             return
         }
+        val gson=Gson()
         val saveTrace=SaveTrace()
+        val jsonStr =gson.toJson(saveTrace)
         saveTrace.traceTimes=list
         TraceTime.traceTimeInfos= mutableListOf()
-        val app = saveTraceInfo(saveTrace)
+        val app = saveTraceInfo(jsonStr)
+        SPUtils.appendTrace(jsonStr)
         Log.d("测试",app.message)
     }
 

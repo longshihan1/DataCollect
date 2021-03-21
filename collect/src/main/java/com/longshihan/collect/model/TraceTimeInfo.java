@@ -1,10 +1,12 @@
 package com.longshihan.collect.model;
 
+import java.io.Serializable;
+
 /**
  * @author longshihan
  * @time 2020/7/26
  */
-public class TraceTimeInfo {
+public class TraceTimeInfo implements Serializable {
     private String tag;//唯一标识符
     private String methodName;
     private long cost;
