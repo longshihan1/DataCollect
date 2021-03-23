@@ -28,4 +28,7 @@ public class TraceTime {
                 , Utils.sdf.format(System.currentTimeMillis()), Thread.currentThread().getName()));
     }
 
+    public static void clear() {
+        traceTimeInfos.clear();
+    }
 }

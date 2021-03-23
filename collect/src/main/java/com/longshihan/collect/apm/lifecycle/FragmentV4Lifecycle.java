@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
+import com.longshihan.collect.control.TraceControl;
+
 
 public class FragmentV4Lifecycle extends FragmentManager.FragmentLifecycleCallbacks {
     public FragmentV4Lifecycle() {
@@ -16,79 +18,79 @@ public class FragmentV4Lifecycle extends FragmentManager.FragmentLifecycleCallba
     @Override
     public void onFragmentActivityCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
         super.onFragmentActivityCreated(fm, f, savedInstanceState);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentActivityCreated");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentActivityCreated");
     }
 
     @Override
     public void onFragmentAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
         super.onFragmentAttached(fm, f, context);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentAttached");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentAttached");
     }
 
     @Override
     public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
         super.onFragmentCreated(fm, f, savedInstanceState);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentCreated");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentCreated");
     }
 
     @Override
     public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentDestroyed(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentDestroyed");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentDestroyed");
     }
 
     @Override
     public void onFragmentDetached(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentDetached(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentDetached");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentDetached");
     }
 
     @Override
     public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentPaused(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentPaused");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentPaused");
     }
 
     @Override
     public void onFragmentPreAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
         super.onFragmentPreAttached(fm, f, context);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentPreAttached");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentPreAttached");
     }
 
     @Override
     public void onFragmentPreCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
         super.onFragmentPreCreated(fm, f, savedInstanceState);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentPreCreated");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentPreCreated");
     }
 
     @Override
     public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentResumed(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentResumed");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentResumed");
     }
 
     @Override
     public void onFragmentStarted(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentStarted(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentStarted");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentStarted");
     }
 
     @Override
     public void onFragmentStopped(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentStopped(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentStopped");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentStopped");
     }
 
     @Override
     public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onFragmentViewCreated(fm, f, v, savedInstanceState);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentViewCreated");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentViewCreated");
     }
 
     @Override
     public void onFragmentViewDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
         super.onFragmentViewDestroyed(fm, f);
-        TraceLifeCycleControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentViewDestroyed");
+        TraceControl.saveFragmentLifeCycleState(f.getClass().getName(), "onFragmentViewDestroyed");
     }
 }
 

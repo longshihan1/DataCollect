@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Message
 import android.view.Choreographer
+import com.longshihan.collect.control.TraceControl
 
 
 class ChoreographerHelp : Choreographer.FrameCallback {
@@ -42,7 +43,7 @@ class ChoreographerHelp : Choreographer.FrameCallback {
                         return
                     }
                     //添加数据
-                    TraceFPSControl.saveActivityLifeCycleState(fpsResult.toInt())
+                    TraceControl.saveFps(fpsResult.toInt())
                 }
                 sendEmptyMessageDelayed(1, 1000)
             }

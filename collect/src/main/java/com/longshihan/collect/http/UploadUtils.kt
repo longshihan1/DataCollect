@@ -4,9 +4,12 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
+import android.text.method.TextKeyListener.clear
 import android.util.Log
 import com.google.gson.Gson
+import com.longshihan.collect.control.TraceControl
 import com.longshihan.collect.http.HttpUtils.saveTraceInfo
+import com.longshihan.collect.model.AppDate
 import com.longshihan.collect.model.time.SaveTrace
 import com.longshihan.collect.traceTime.TraceTime
 import com.longshihan.collect.utils.SPUtils
@@ -45,17 +48,16 @@ object UploadUtils {
     }
 
     fun uploadMessage(){
-        val list=TraceTime.traceTimeInfos
-        if (list.size==0){
-            return
-        }
+        val traceList=TraceTime.traceTimeInfos
+        val lifecycleList= TraceControl.traceLifecycleInfos
+        val fpsList=TraceControl.traceFPSInfos
         val gson=Gson()
-        val saveTrace= SaveTrace()
-        val jsonStr =gson.toJson(saveTrace)
-        saveTrace.traceTimes=list
-        TraceTime.traceTimeInfos= mutableListOf()
+        val appData=AppDate(fpsList,lifecycleList,traceList)
+        TraceControl.clearList()
+        val jsonStr=gson.toJson(appData)
         val app = saveTraceInfo(jsonStr)
-        SPUtils.appendTrace(jsonStr)
+        appData.saveSp()
+        appData.clear()
         Log.d("测试",app.message)
     }
 

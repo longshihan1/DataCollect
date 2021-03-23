@@ -1,5 +1,8 @@
 package com.longshihan.collect.model;
 
+import com.longshihan.collect.utils.JsonUtils;
+import com.longshihan.collect.utils.SPUtils;
+
 import java.io.Serializable;
 
 /**
@@ -49,4 +52,6 @@ public class APP<T> implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+
+import com.longshihan.collect.control.TraceControl;
 import com.longshihan.collect.init.TraceManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
         mActivitys.add(activity);
-        TraceLifeCycleControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityCreated");
+        TraceControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityCreated");
         if (mActivitys.size() == 1) {//第一次启动
             TraceManager.getInstance().showMenu(activity);
         }
@@ -37,24 +39,24 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityStarted(@NonNull Activity activity) {
         count++;
-        TraceLifeCycleControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityStarted");
+        TraceControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityStarted");
     }
 
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
-        TraceLifeCycleControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityResumed");
+        TraceControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityResumed");
 
     }
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
-        TraceLifeCycleControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityPaused");
+        TraceControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityPaused");
 
     }
 
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
-        TraceLifeCycleControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityStopped");
+        TraceControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityStopped");
         count--;
         if (count == 0) {
             TraceManager.getInstance().dimiss();
@@ -68,7 +70,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
-        TraceLifeCycleControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityDestroyed");
+        TraceControl.saveActivityLifeCycleState(activity.getClass().getName(), "onActivityDestroyed");
         mActivitys.remove(activity);
     }
 }
