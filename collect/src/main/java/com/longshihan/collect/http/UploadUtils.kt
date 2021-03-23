@@ -7,7 +7,7 @@ import android.os.Message
 import android.util.Log
 import com.google.gson.Gson
 import com.longshihan.collect.http.HttpUtils.saveTraceInfo
-import com.longshihan.collect.model.SaveTrace
+import com.longshihan.collect.model.time.SaveTrace
 import com.longshihan.collect.traceTime.TraceTime
 import com.longshihan.collect.utils.SPUtils
 
@@ -50,7 +50,7 @@ object UploadUtils {
             return
         }
         val gson=Gson()
-        val saveTrace=SaveTrace()
+        val saveTrace= SaveTrace()
         val jsonStr =gson.toJson(saveTrace)
         saveTrace.traceTimes=list
         TraceTime.traceTimeInfos= mutableListOf()

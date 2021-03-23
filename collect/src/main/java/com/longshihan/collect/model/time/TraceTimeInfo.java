@@ -1,4 +1,4 @@
-package com.longshihan.collect.model;
+package com.longshihan.collect.model.time;
 
 import java.io.Serializable;
 

@@ -3,17 +3,11 @@ package com.longshihan.collect.http;
 import com.google.gson.Gson;
 import com.longshihan.collect.init.Config;
 import com.longshihan.collect.model.APP;
-import com.longshihan.collect.model.SaveTrace;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;

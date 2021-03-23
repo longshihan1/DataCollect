@@ -1,7 +1,7 @@
 package com.longshihan.collect.apm.lifecycle;
 
 import com.longshihan.collect.init.Utils;
-import com.longshihan.collect.model.TraceLifecycleInfo;
+import com.longshihan.collect.model.lifecycle.TraceLifecycleInfo;
 
 import java.util.ArrayList;
 import java.util.List;

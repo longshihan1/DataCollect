@@ -1,4 +1,4 @@
-package com.longshihan.collect.model;
+package com.longshihan.collect.model.state;
 
 import java.io.Serializable;
 

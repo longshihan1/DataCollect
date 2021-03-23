@@ -1,7 +1,7 @@
 package com.longshihan.collect.traceTime;
 
 import com.longshihan.collect.init.Utils;
-import com.longshihan.collect.model.TraceTimeInfo;
+import com.longshihan.collect.model.time.TraceTimeInfo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
