@@ -1,11 +1,13 @@
 package com.longshihan.collect.model.lifecycle;
 
+import com.longshihan.collect.model.TraceOriginInfo;
+
 import java.io.Serializable;
 
 /**
  * 记录APP生命周期活动
  */
-public class TraceLifecycleInfo implements Serializable {
+public class TraceLifecycleInfo extends TraceOriginInfo implements Serializable {
     private String activityName;
     private boolean isActivity;
     private String state;
@@ -16,6 +18,7 @@ public class TraceLifecycleInfo implements Serializable {
         this.isActivity = isActivity;
         this.state = state;
         this.datetime = datetime;
+        dataType = "lifecycle";
     }
 
     public String getActivityName() {

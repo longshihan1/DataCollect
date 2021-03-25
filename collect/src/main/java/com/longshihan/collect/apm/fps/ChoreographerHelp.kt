@@ -7,17 +7,12 @@ import android.view.Choreographer
 import com.longshihan.collect.control.TraceControl
 
 
-class ChoreographerHelp : Choreographer.FrameCallback {
+object ChoreographerHelp : Choreographer.FrameCallback {
     var mFpsCount = 0
     private var mLastFrameTimeNanos: Long = 0 //最后一次时间
     private var mFrameTimeNanos: Long = 0 //本次的当前时间
 
-    init {
-        //启动
-        start()
-    }
-
-    private fun start() {
+    fun start() {
         //启动一秒循环器的数据
         handler.sendEmptyMessage(1)
         Choreographer.getInstance().postFrameCallback(this)

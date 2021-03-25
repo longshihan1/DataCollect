@@ -29,7 +29,7 @@ class SPUtils {
         }
         @JvmStatic
         fun save(fileId: Long, value: String) {
-            MMAP.nativeWrite(fileId,value)
+            MMAP.nativeWrite(fileId, "$value\r\n")
         }
 
         /**

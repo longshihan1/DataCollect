@@ -1,11 +1,13 @@
 package com.longshihan.collect.model.state;
 
+import com.longshihan.collect.model.TraceOriginInfo;
+
 import java.io.Serializable;
 
 /**
  * 记录APP其他时间
  */
-public class TraceStateInfo implements Serializable {
+public class TraceStateInfo extends TraceOriginInfo implements Serializable {
     private String tag;//前台后台，开屏息屏等
     private String state;
     private String datetime;
@@ -14,6 +16,7 @@ public class TraceStateInfo implements Serializable {
         this.tag = tag;
         this.state = state;
         this.datetime = datetime;
+        dataType="state";
     }
 
 

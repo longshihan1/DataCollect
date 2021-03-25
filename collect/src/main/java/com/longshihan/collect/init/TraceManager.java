@@ -10,13 +10,12 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.longshihan.collect.apm.fps.ChoreographerHelp;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.control.LMenu;
 import com.longshihan.collect.http.UploadUtils;
 import com.longshihan.collect.utils.FileUtils;
 import com.longshihan.collect.utils.SPUtils;
-
-import java.io.File;
 
 /**
  * App启动的时候唤醒，初始化相关数据和建立文件，创建连接
@@ -53,21 +52,12 @@ public class TraceManager {
                 TraceManager.getInstance().showMenu(context);
             }
             //初始化MMKV
-            SPUtils.init(mContext, FileUtils.CheckOtherDate());
+            SPUtils.defaultinit(mContext, FileUtils.CheckOtherDate());
+            ChoreographerHelp.INSTANCE.start();
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();
             UploadUtils.uploadMsg();
-            //轮训开启任务
-            File file = context.getExternalCacheDir();
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            Utils.timefilename = file.getAbsolutePath() + "/time-" + Utils.sdf.format(System.currentTimeMillis()) + ".txt";
-            File file1 = new File(Utils.timefilename);
-            if (!file1.exists()) {
-                file1.createNewFile();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

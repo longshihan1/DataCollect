@@ -1,12 +1,14 @@
 package com.longshihan.collect.model.time;
 
+import com.longshihan.collect.model.TraceOriginInfo;
+
 import java.io.Serializable;
 
 /**
  * @author longshihan
  * @time 2020/7/26
  */
-public class TraceTimeInfo implements Serializable {
+public class TraceTimeInfo extends TraceOriginInfo implements Serializable {
     private String tag;//唯一标识符
     private String methodName;
     private long cost;
@@ -22,6 +24,7 @@ public class TraceTimeInfo implements Serializable {
         this.cost = cost;
         this.datetime = datetime;
         this.threadName = threadName;
+        dataType = "time";
     }
 
     public String getMethodName() {
@@ -57,8 +60,8 @@ public class TraceTimeInfo implements Serializable {
         this.datetime = datetime;
     }
 
-    public Object[] getObjects(){
-        return new Object[]{getTag(),getMethodName(),getCost(),getDatetime()};
+    public Object[] getObjects() {
+        return new Object[]{getTag(), getMethodName(), getCost(), getDatetime()};
     }
 
     public String getThreadName() {
