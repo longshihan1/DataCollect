@@ -12,7 +12,6 @@ import com.longshihan.collect.utils.MatrixLog;
 import com.longshihan.collect.utils.reflect.ReflectUtils;
 
 import java.util.HashSet;
-import java.util.Objects;
 
 public class LooperMonitor implements MessageQueue.IdleHandler {
 
