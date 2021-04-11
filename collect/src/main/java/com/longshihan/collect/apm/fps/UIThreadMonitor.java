@@ -7,6 +7,7 @@ import android.view.Choreographer;
 
 import com.longshihan.collect.apm.fps.listener.BeatLifecycle;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
+import com.longshihan.collect.init.Utils;
 import com.longshihan.collect.utils.Constants;
 import com.longshihan.collect.utils.MatrixLog;
 import com.longshihan.collect.utils.reflect.ReflectUtils;
@@ -21,7 +22,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
     private static final String TAG = "Matrix.UIThreadMonitor";
     private static final String ADD_CALLBACK = "addCallbackLocked";
     private volatile boolean isAlive = false;
-    private long[] dispatchTimeMs = new long[4];
+    private final long[] dispatchTimeMs = new long[4];
     private final HashSet<LooperObserver> observers = new HashSet<>();
     private volatile long token = 0L;
     private boolean isVsyncFrame = false;
@@ -123,15 +124,6 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
         MatrixLog.i(TAG, "[UIThreadMonitor] %s %s %s %s %s %s frameIntervalNanos:%s", callbackQueueLock == null, callbackQueues == null,
                 addInputQueue == null, addTraversalQueue == null, addAnimationQueue == null, vsyncReceiver == null, frameIntervalNanos);
 
-
-        addObserver(new LooperObserver() {
-            @Override
-            public void doFrame(String focusedActivity, long startNs, long endNs, boolean isVsyncFrame, long intendedFrameTimeNs, long inputCostNs, long animationCostNs, long traversalCostNs) {
-                MatrixLog.i(TAG, "focusedActivity[%s] frame cost:%sms isVsyncFrame=%s intendedFrameTimeNs=%s [%s|%s|%s]ns",
-                        focusedActivity, (endNs - startNs) / Constants.TIME_MILLIS_TO_NANO, isVsyncFrame, intendedFrameTimeNs, inputCostNs, animationCostNs, traversalCostNs);
-            }
-        });
-
     }
 
     private synchronized void addFrameCallback(int type, Runnable callback, boolean isAddHeader) {
@@ -202,9 +194,9 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
                 }
             }
         }
-        if (config.isDevEnv()) {
-            MatrixLog.d(TAG, "[dispatchBegin#run] inner cost:%sns", System.nanoTime() - token);
-        }
+
+         MatrixLog.d(TAG, "[dispatchBegin#run] inner cost:%sns", System.nanoTime() - token);
+
     }
 
     private void doFrameBegin(long token) {
@@ -218,9 +210,9 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
         for (int i : queueStatus) {
             if (i != DO_QUEUE_END) {
                 queueCost[i] = DO_QUEUE_END_ERROR;
-                if (config.isDevEnv) {
+
                     throw new RuntimeException(String.format("UIThreadMonitor happens type[%s] != DO_QUEUE_END", i));
-                }
+
             }
         }
         queueStatus = new int[CALLBACK_LAST + 1];
@@ -230,10 +222,8 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
     }
 
     private void dispatchEnd() {
-        long traceBegin = 0;
-        if (config.isDevEnv()) {
-            traceBegin = System.nanoTime();
-        }
+        long traceBegin = System.nanoTime();
+
         long startNs = token;
         long intendedFrameTimeNs = startNs;
         if (isVsyncFrame) {
@@ -246,7 +236,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
         synchronized (observers) {
             for (LooperObserver observer : observers) {
                 if (observer.isDispatchBegin()) {
-                    observer.doFrame(AppMethodBeat.getVisibleScene(), startNs, endNs, isVsyncFrame, intendedFrameTimeNs, queueCost[CALLBACK_INPUT], queueCost[CALLBACK_ANIMATION], queueCost[CALLBACK_TRAVERSAL]);
+                    observer.doFrame("pagename", startNs, endNs, isVsyncFrame, intendedFrameTimeNs, queueCost[CALLBACK_INPUT], queueCost[CALLBACK_ANIMATION], queueCost[CALLBACK_TRAVERSAL]);
                 }
             }
         }
@@ -264,10 +254,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
             }
         }
         this.isVsyncFrame = false;
-
-        if (config.isDevEnv()) {
-            MatrixLog.d(TAG, "[dispatchEnd#run] inner cost:%sns", System.nanoTime() - traceBegin);
-        }
+        MatrixLog.d(TAG, "[dispatchEnd#run] inner cost:%sns", System.nanoTime() - traceBegin);
     }
 
     private void doQueueBegin(int type) {
@@ -327,9 +314,9 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
             }, true);
 
         } finally {
-            if (config.isDevEnv()) {
+
                 MatrixLog.d(TAG, "[UIThreadMonitor#run] inner cost:%sns", System.nanoTime() - start);
-            }
+
         }
     }
 

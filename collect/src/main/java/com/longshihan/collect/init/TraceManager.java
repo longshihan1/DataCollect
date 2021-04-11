@@ -10,7 +10,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.longshihan.collect.apm.fps.ChoreographerHelp;
+import com.longshihan.collect.apm.anr.AnrTrace;
+import com.longshihan.collect.apm.anr.EvilMethodTracer;
+import com.longshihan.collect.apm.fps.FPSPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.control.LMenu;
 import com.longshihan.collect.http.UploadUtils;
@@ -53,7 +55,14 @@ public class TraceManager {
             }
             //初始化MMKV
             SPUtils.defaultinit(mContext, FileUtils.CheckOtherDate());
-            ChoreographerHelp.INSTANCE.start();
+            //FPS 启动
+           FPSPlugin.INSTANCE.init();
+           FPSPlugin.INSTANCE.start();
+           //Anr 和 Evil
+            AnrTrace.getInstance().init();
+            AnrTrace.getInstance().start();
+            EvilMethodTracer.getInstance().init();
+            EvilMethodTracer.getInstance().start();
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();

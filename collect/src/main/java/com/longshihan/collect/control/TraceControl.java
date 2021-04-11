@@ -1,6 +1,7 @@
 package com.longshihan.collect.control;
 
 import com.longshihan.collect.init.Utils;
+import com.longshihan.collect.model.fps.TraceFPSDataInfo;
 import com.longshihan.collect.model.fps.TraceFPSInfo;
 import com.longshihan.collect.model.lifecycle.TraceLifecycleInfo;
 import com.longshihan.collect.traceTime.TraceTime;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class TraceControl {
     public static List<TraceFPSInfo> traceFPSInfos = new ArrayList<>();
+    public static List<TraceFPSDataInfo> traceFPSDataInfos = new ArrayList<>();
     public static List<TraceLifecycleInfo> traceLifecycleInfos = new ArrayList<>();
 
     public static void saveActivityLifeCycleState(String className, String state) {
@@ -25,6 +27,11 @@ public class TraceControl {
     public static void saveFps(int fps) {
         traceFPSInfos.add(new TraceFPSInfo(fps,
                 Utils.sdf.format(System.currentTimeMillis())));
+    }
+
+    public static void saveFpsData(long inputCostNs,long animationCostNs,long traversalCostNs) {
+        traceFPSDataInfos.add(new TraceFPSDataInfo(inputCostNs,animationCostNs,traversalCostNs,
+                Utils.sdfTime.format(System.currentTimeMillis())));
     }
 
     public static void clearList() {

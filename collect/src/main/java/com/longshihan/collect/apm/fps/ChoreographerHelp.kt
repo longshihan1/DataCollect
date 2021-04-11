@@ -4,19 +4,30 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Message
 import android.view.Choreographer
+import com.longshihan.collect.apm.fps.listener.FpsObserver
+import com.longshihan.collect.apm.fps.listener.LooperObserver
 import com.longshihan.collect.control.TraceControl
+import com.longshihan.collect.utils.MatrixLog.d
+import java.util.*
 
-
+/**
+ * fps 相关总类
+ */
 object ChoreographerHelp : Choreographer.FrameCallback {
     var mFpsCount = 0
     private var mLastFrameTimeNanos: Long = 0 //最后一次时间
     private var mFrameTimeNanos: Long = 0 //本次的当前时间
-
+    private var observers :FpsObserver?=null
     fun start() {
         //启动一秒循环器的数据
         handler.sendEmptyMessage(1)
         Choreographer.getInstance().postFrameCallback(this)
     }
+
+    fun addObserver(observer: FpsObserver) {
+        observers=observer
+    }
+
 
     private val handler: Handler = @SuppressLint("HandlerLeak")
     object : Handler() {
@@ -34,13 +45,16 @@ object ChoreographerHelp : Choreographer.FrameCallback {
                         return
                     }
                     val fpsResult = (currentFpsCount * 1000 / costTime).toDouble()
+                    d("FPS", "当前帧率：$fpsResult", "")
                     if (fpsResult < 0) {
                         return
                     }
                     //添加数据
-                    TraceControl.saveFps(fpsResult.toInt())
+                    observers?.frameCallback(fpsResult.toInt())
                 }
-                sendEmptyMessageDelayed(1, 1000)
+                if (observers != null) {
+                    sendEmptyMessageDelayed(1, 1000)
+                }
             }
         }
     }
