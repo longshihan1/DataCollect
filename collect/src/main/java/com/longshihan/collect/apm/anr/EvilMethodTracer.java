@@ -12,11 +12,14 @@ import com.longshihan.collect.utils.MatrixLog;
 
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * 慢方法追踪
+ */
 public class EvilMethodTracer extends LooperObserver implements IPlugin {
     private static final String TAG = "Matrix.EvilMethodTracer";
     private AppMethodBeat.IndexRecord indexRecord;
     private long[] queueTypeCosts = new long[3];
-    private long evilThresholdMs=2000;
+    private long evilThresholdMs=700;
     private boolean isEvilMethodTraceEnable;
     private static EvilMethodTracer instance;
 
