@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handler() {
+        android.os.Trace.beginSection("");
         Thread().run {
         try {
             Log.d("测试","线程")
@@ -39,5 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         }
         }
+        android.os.Trace.endSection();
     }
 }

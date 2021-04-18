@@ -51,7 +51,7 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
         long dispatchCost = (endNs - beginNs) / Constants.TIME_MILLIS_TO_NANO;
         try {
             if (dispatchCost >= evilThresholdMs) {
-                Log.d("测试","evilThresholdMs");
+                Log.d("测试","evilThresholdMs"+queueTypeCosts[0]+":"+queueTypeCosts[1]+":"+queueTypeCosts[2]);
                 //直接打标记
                 MatrixHandlerThread.getDefaultHandler().post(new AnalyseTask());
             }
