@@ -2,10 +2,12 @@ package com.longshihan.datacollect1
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.TextView
 import com.longshihan.collect.http.UploadUtils
 import com.longshihan.collect.init.Trace
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +26,18 @@ class MainActivity : AppCompatActivity() {
                 val text = TextView(this)
             }
             Trace.initLast(MainActivity::class.java.name, "onclick",tag)
+            handler()
+        }
+    }
 
+    private fun handler() {
+        Thread().run {
+        try {
+            Log.d("测试","线程")
+            Thread.sleep(10000)
+        }catch (e:Exception){
+
+        }
         }
     }
 }

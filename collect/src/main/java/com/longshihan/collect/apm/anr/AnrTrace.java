@@ -4,7 +4,6 @@ import android.os.Handler;
 
 import com.longshihan.collect.apm.anr.task.AnrHandleTask;
 import com.longshihan.collect.apm.anr.task.LagHandleTask;
-import com.longshihan.collect.apm.fps.AppMethodBeat;
 import com.longshihan.collect.apm.fps.UIThreadMonitor;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
 import com.longshihan.collect.init.Utils;
@@ -50,9 +49,8 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     @Override
     public void dispatchBegin(long beginNs, long cpuBeginNs, long token) {
         super.dispatchBegin(beginNs, cpuBeginNs, token);
-        anrTask.beginRecord = AppMethodBeat.getInstance().maskIndex("AnrTracer#dispatchBegin");
-        anrTask.token = token;
-        MatrixLog.v(TAG, "* [dispatchBegin] token:%s index:%s", token, anrTask.beginRecord.index);
+
+        MatrixLog.v(TAG, "* [dispatchBegin] token:%s ", token);
         long cost = (System.nanoTime() - token) / Constants.TIME_MILLIS_TO_NANO;
         anrHandler.postDelayed(anrTask, Constants.DEFAULT_ANR - cost);
         lagHandler.postDelayed(lagTask, Constants.DEFAULT_NORMAL_LAG - cost);
@@ -67,7 +65,6 @@ public class AnrTrace extends LooperObserver implements IPlugin {
                     token, cost, cpuEndMs - cpuBeginMs, Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, cost));
 
         if (null != anrTask) {
-            anrTask.getBeginRecord().release();
             anrHandler.removeCallbacks(anrTask);
         }
         if (null != lagTask) {
@@ -83,9 +80,6 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     @Override
     public void destory() {
         UIThreadMonitor.getMonitor().removeObserver(this);
-        if (null != anrTask) {
-            anrTask.getBeginRecord().release();
-        }
         anrHandler.removeCallbacksAndMessages(null);
         lagHandler.removeCallbacksAndMessages(null);
     }

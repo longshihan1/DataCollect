@@ -1,7 +1,8 @@
 package com.longshihan.collect.apm.anr;
 
+import android.util.Log;
+
 import com.longshihan.collect.apm.anr.task.AnalyseTask;
-import com.longshihan.collect.apm.fps.AppMethodBeat;
 import com.longshihan.collect.apm.fps.UIThreadMonitor;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
 import com.longshihan.collect.init.Utils;
@@ -17,10 +18,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public class EvilMethodTracer extends LooperObserver implements IPlugin {
     private static final String TAG = "Matrix.EvilMethodTracer";
-    private AppMethodBeat.IndexRecord indexRecord;
     private long[] queueTypeCosts = new long[3];
     private long evilThresholdMs=700;
-    private boolean isEvilMethodTraceEnable;
     private static EvilMethodTracer instance;
 
     public static EvilMethodTracer getInstance() {
@@ -43,7 +42,6 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
     @Override
     public void dispatchBegin(long beginNs, long cpuBeginNs, long token) {
         super.dispatchBegin(beginNs, cpuBeginNs, token);
-        indexRecord = AppMethodBeat.getInstance().maskIndex("EvilMethodTracer#dispatchBegin");
     }
 
     @Override
@@ -53,15 +51,11 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
         long dispatchCost = (endNs - beginNs) / Constants.TIME_MILLIS_TO_NANO;
         try {
             if (dispatchCost >= evilThresholdMs) {
-                long[] data = AppMethodBeat.getInstance().copyData(indexRecord);
-                long[] queueCosts = new long[3];
-                System.arraycopy(queueTypeCosts, 0, queueCosts, 0, 3);
-                String scene = AppMethodBeat.getVisibleScene();
-                MatrixHandlerThread.getDefaultHandler().post(new AnalyseTask(true, scene, data, queueCosts, cpuEndMs - cpuBeginMs, dispatchCost, endNs / Constants.TIME_MILLIS_TO_NANO));
+                Log.d("测试","evilThresholdMs");
+                //直接打标记
+                MatrixHandlerThread.getDefaultHandler().post(new AnalyseTask());
             }
         } finally {
-            indexRecord.release();
-
                 String usage = Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, dispatchCost);
                 MatrixLog.v(TAG, "[dispatchEnd] token:%s cost:%sms cpu:%sms usage:%s innerCost:%s",
                         token, dispatchCost, cpuEndMs - cpuBeginMs, usage, System.currentTimeMillis() - start);

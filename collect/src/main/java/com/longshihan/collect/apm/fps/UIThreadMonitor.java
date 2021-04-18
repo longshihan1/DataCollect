@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.view.Choreographer;
 
 import com.longshihan.collect.apm.fps.listener.BeatLifecycle;
+import com.longshihan.collect.apm.fps.listener.LooperDispatchListener;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
 import com.longshihan.collect.init.Utils;
 import com.longshihan.collect.utils.Constants;
@@ -101,7 +102,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
         vsyncReceiver = ReflectUtils.reflectObject(choreographer, "mDisplayEventReceiver", null);
         frameIntervalNanos = ReflectUtils.reflectObject(choreographer, "mFrameIntervalNanos", Constants.DEFAULT_FRAME_DURATION);
 
-        LooperMonitor.register(new LooperMonitor.LooperDispatchListener() {
+        PrinterObservrt.register(new LooperDispatchListener() {
             @Override
             public boolean isValid() {
                 return isAlive;
@@ -185,8 +186,6 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
     private void dispatchBegin() {
         token = dispatchTimeMs[0] = System.nanoTime();
         dispatchTimeMs[2] = SystemClock.currentThreadTimeMillis();
-        AppMethodBeat.i(AppMethodBeat.METHOD_ID_DISPATCH);
-
         synchronized (observers) {
             for (LooperObserver observer : observers) {
                 if (!observer.isDispatchBegin()) {
@@ -194,9 +193,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
                 }
             }
         }
-
          MatrixLog.d(TAG, "[dispatchBegin#run] inner cost:%sns", System.nanoTime() - token);
-
     }
 
     private void doFrameBegin(long token) {
@@ -204,35 +201,26 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
     }
 
     private void doFrameEnd(long token) {
-
         doQueueEnd(CALLBACK_TRAVERSAL);
-
         for (int i : queueStatus) {
             if (i != DO_QUEUE_END) {
                 queueCost[i] = DO_QUEUE_END_ERROR;
-
-                    throw new RuntimeException(String.format("UIThreadMonitor happens type[%s] != DO_QUEUE_END", i));
-
             }
         }
         queueStatus = new int[CALLBACK_LAST + 1];
-
         addFrameCallback(CALLBACK_INPUT, this, true);
 
     }
 
     private void dispatchEnd() {
         long traceBegin = System.nanoTime();
-
         long startNs = token;
         long intendedFrameTimeNs = startNs;
         if (isVsyncFrame) {
             doFrameEnd(token);
             intendedFrameTimeNs = getIntendedFrameTimeNs(startNs);
         }
-
         long endNs = System.nanoTime();
-
         synchronized (observers) {
             for (LooperObserver observer : observers) {
                 if (observer.isDispatchBegin()) {
@@ -240,12 +228,8 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
                 }
             }
         }
-
         dispatchTimeMs[3] = SystemClock.currentThreadTimeMillis();
         dispatchTimeMs[1] = System.nanoTime();
-
-        AppMethodBeat.o(AppMethodBeat.METHOD_ID_DISPATCH);
-
         synchronized (observers) {
             for (LooperObserver observer : observers) {
                 if (observer.isDispatchBegin()) {
