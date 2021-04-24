@@ -13,6 +13,7 @@ import com.longshihan.collect.model.AppDate
 import com.longshihan.collect.model.time.SaveTrace
 import com.longshihan.collect.traceTime.TraceTime
 import com.longshihan.collect.utils.SPUtils
+import java.lang.Exception
 
 
 //先启动一个用户注册接口
@@ -48,17 +49,22 @@ object UploadUtils {
     }
 
     fun uploadMessage(){
-        val traceList=TraceTime.traceTimeInfos
-        val lifecycleList= TraceControl.traceLifecycleInfos
-        val fpsList=TraceControl.traceFPSInfos
-        val gson=Gson()
-        val appData=AppDate(fpsList,lifecycleList,traceList)
-        TraceControl.clearList()
-        val jsonStr=gson.toJson(appData)
-        val app = saveTraceInfo(jsonStr)
-        appData.saveSp()
-        appData.clear()
-        Log.d("测试",app.message)
+        try {
+            val traceList=TraceTime.traceTimeInfos
+            val lifecycleList= TraceControl.traceLifecycleInfos
+            val fpsList=TraceControl.traceFPSInfos
+//            val gson=Gson()
+            val appData=AppDate(fpsList,lifecycleList,traceList)
+            TraceControl.clearList()
+            Log.d("测试00",appData.dataList.size.toString())
+//            val jsonStr=gson.toJson(appData)
+//            val app = saveTraceInfo(jsonStr)
+            appData.saveSp()
+            appData.clear()
+//            Log.d("测试",app.message)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
 
@@ -70,8 +76,8 @@ object UploadUtils {
                     uploadUtils.login()
                 }//注册
                 msgWhat -> {
-//                    uploadUtils.uploadMessage()
-                    sendEmptyMessageDelayed(10002, deleyTime)
+                    sendEmptyMessageDelayed(msgWhat, deleyTime)
+                    uploadUtils.uploadMessage()
                 }
             }
         }
