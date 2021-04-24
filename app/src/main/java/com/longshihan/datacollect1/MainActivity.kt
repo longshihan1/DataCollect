@@ -1,5 +1,6 @@
 package com.longshihan.datacollect1
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -28,10 +29,13 @@ class MainActivity : AppCompatActivity() {
             Trace.initLast(MainActivity::class.java.name, "onclick",tag)
             handler()
         }
+        testio.setOnClickListener {
+            //测试IO
+            startActivity(Intent(this,TestIOActivity::class.java))
+        }
     }
 
     private fun handler() {
-        android.os.Trace.beginSection("");
         Thread().run {
         try {
             Log.d("测试","线程")
@@ -40,6 +44,5 @@ class MainActivity : AppCompatActivity() {
 
         }
         }
-        android.os.Trace.endSection();
     }
 }

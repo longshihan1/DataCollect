@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.longshihan.collect.apm.anr.AnrTrace;
 import com.longshihan.collect.apm.anr.EvilMethodTracer;
 import com.longshihan.collect.apm.fps.FPSPlugin;
+import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.control.LMenu;
 import com.longshihan.collect.http.UploadUtils;
@@ -63,6 +64,9 @@ public class TraceManager {
             AnrTrace.getInstance().start();
             EvilMethodTracer.getInstance().init();
             EvilMethodTracer.getInstance().start();
+            //IO
+            IOPlugin.INSTANCE.init();
+            IOPlugin.INSTANCE.start();
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();

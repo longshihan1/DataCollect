@@ -70,7 +70,7 @@ object UploadUtils {
                     uploadUtils.login()
                 }//注册
                 msgWhat -> {
-                    uploadUtils.uploadMessage()
+//                    uploadUtils.uploadMessage()
                     sendEmptyMessageDelayed(10002, deleyTime)
                 }
             }

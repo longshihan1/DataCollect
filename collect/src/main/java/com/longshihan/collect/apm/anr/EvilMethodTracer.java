@@ -7,6 +7,7 @@ import com.longshihan.collect.apm.fps.UIThreadMonitor;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
 import com.longshihan.collect.init.Utils;
 import com.longshihan.collect.plugin.IPlugin;
+import com.longshihan.collect.traceTime.TraceTime;
 import com.longshihan.collect.utils.Constants;
 import com.longshihan.collect.utils.MatrixHandlerThread;
 import com.longshihan.collect.utils.MatrixLog;
@@ -42,16 +43,20 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
     @Override
     public void dispatchBegin(long beginNs, long cpuBeginNs, long token) {
         super.dispatchBegin(beginNs, cpuBeginNs, token);
+        TraceTime.onFrameStart();
     }
 
     @Override
     public void dispatchEnd(long beginNs, long cpuBeginMs, long endNs, long cpuEndMs, long token, boolean isVsyncFrame) {
         super.dispatchEnd(beginNs, cpuBeginMs, endNs, cpuEndMs, token, isVsyncFrame);
+        TraceTime.onFrameEnd();
         long start = System.currentTimeMillis();
         long dispatchCost = (endNs - beginNs) / Constants.TIME_MILLIS_TO_NANO;
         try {
             if (dispatchCost >= evilThresholdMs) {
+
                 Log.d("测试","evilThresholdMs"+queueTypeCosts[0]+":"+queueTypeCosts[1]+":"+queueTypeCosts[2]);
+                Log.d("测试","EvilMethodTracer:"+TraceTime.onFrameStack());
                 //直接打标记
                 MatrixHandlerThread.getDefaultHandler().post(new AnalyseTask());
             }

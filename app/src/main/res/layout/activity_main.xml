@@ -17,4 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="埋点" />
+    <TextView
+            android:id="@+id/testio"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="测试io" />
+
 </LinearLayout>
