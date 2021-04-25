@@ -5,17 +5,17 @@ buildscript {
         maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         maven{ url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://jitpack.io' }
-        maven {
-            url uri('C:\\IdeaProjects\\SPIPlugin\\repo')
-
-        }
+//        maven {
+//            url uri('C:\\IdeaProjects\\SPIPlugin\\repo')
+//        }
         google()
         jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.longshihan.Lplugin:LPlugin:1.0.10'
+//        classpath 'com.longshihan.Lplugin:LPlugin:1.0.10'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -26,10 +26,10 @@ allprojects {
         maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         maven{ url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://jitpack.io' }
-        maven {
-            url uri('C:\\IdeaProjects\\SPIPlugin\\repo')
-
-        }
+//        maven {
+//            url uri('C:\\IdeaProjects\\SPIPlugin\\repo')
+//
+//        }
         google()
         jcenter()
     }

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'lplugin'
+//apply plugin: 'lplugin'
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.0"
