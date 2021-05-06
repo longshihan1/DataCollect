@@ -1,4 +1,4 @@
-package com.longshihan.collect.control
+package com.longshihan.collect.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

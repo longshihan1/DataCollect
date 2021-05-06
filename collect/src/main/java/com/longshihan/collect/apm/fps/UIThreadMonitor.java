@@ -193,7 +193,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
                 }
             }
         }
-         MatrixLog.d(TAG, "[dispatchBegin#run] inner cost:%sns", System.nanoTime() - token);
+//         MatrixLog.d(TAG, "[dispatchBegin#run] inner cost:%sns", System.nanoTime() - token);
     }
 
     private void doFrameBegin(long token) {
@@ -238,7 +238,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
             }
         }
         this.isVsyncFrame = false;
-        MatrixLog.d(TAG, "[dispatchEnd#run] inner cost:%sns", System.nanoTime() - traceBegin);
+//        MatrixLog.d(TAG, "[dispatchEnd#run] inner cost:%sns", System.nanoTime() - traceBegin);
     }
 
     private void doQueueBegin(int type) {
@@ -299,7 +299,7 @@ public class UIThreadMonitor implements BeatLifecycle, Runnable {
 
         } finally {
 
-                MatrixLog.d(TAG, "[UIThreadMonitor#run] inner cost:%sns", System.nanoTime() - start);
+//                MatrixLog.d(TAG, "[UIThreadMonitor#run] inner cost:%sns", System.nanoTime() - start);
 
         }
     }

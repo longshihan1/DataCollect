@@ -45,7 +45,7 @@ object ChoreographerHelp : Choreographer.FrameCallback {
                         return
                     }
                     val fpsResult = (currentFpsCount * 1000 / costTime).toDouble()
-                    d("FPS", "当前帧率：$fpsResult", "")
+//                    d("FPS", "当前帧率：$fpsResult", "")
                     if (fpsResult < 0) {
                         return
                     }

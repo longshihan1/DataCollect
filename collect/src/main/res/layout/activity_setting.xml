@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".control.SettingActivity">
+        tools:context=".ui.SettingActivity">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -39,6 +39,30 @@
             android:layout_height="50dp"
             android:background="@color/colorPrimaryDark"
             android:text="开启上传"
+            android:gravity="center"
+            android:textColor="#ffffff" />
+    <TextView
+            android:id="@+id/l_openfps"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="FPS打印"
+            android:gravity="center"
+            android:textColor="#ffffff" />
+    <TextView
+            android:id="@+id/l_openprinter"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="Hnadler 打印"
+            android:gravity="center"
+            android:textColor="#ffffff" />
+    <TextView
+            android:id="@+id/l_openanr"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="ANR打印"
             android:gravity="center"
             android:textColor="#ffffff" />
 </LinearLayout>

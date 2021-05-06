@@ -15,7 +15,7 @@ import com.longshihan.collect.apm.anr.EvilMethodTracer;
 import com.longshihan.collect.apm.fps.FPSPlugin;
 import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
-import com.longshihan.collect.control.LMenu;
+import com.longshihan.collect.ui.LMenu;
 import com.longshihan.collect.http.UploadUtils;
 import com.longshihan.collect.utils.FileUtils;
 import com.longshihan.collect.utils.SPUtils;

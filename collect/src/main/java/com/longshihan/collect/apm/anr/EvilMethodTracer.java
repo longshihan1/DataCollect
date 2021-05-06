@@ -62,8 +62,8 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
             }
         } finally {
                 String usage = Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, dispatchCost);
-                MatrixLog.v(TAG, "[dispatchEnd] token:%s cost:%sms cpu:%sms usage:%s innerCost:%s",
-                        token, dispatchCost, cpuEndMs - cpuBeginMs, usage, System.currentTimeMillis() - start);
+//                MatrixLog.v(TAG, "[dispatchEnd] token:%s cost:%sms cpu:%sms usage:%s innerCost:%s",
+//                        token, dispatchCost, cpuEndMs - cpuBeginMs, usage, System.currentTimeMillis() - start);
 
         }
     }

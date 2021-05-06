@@ -56,7 +56,7 @@ object UploadUtils {
 //            val gson=Gson()
             val appData=AppDate(fpsList,lifecycleList,traceList)
             TraceControl.clearList()
-            Log.d("测试00",appData.dataList.size.toString())
+//            Log.d("测试00",appData.dataList.size.toString())
 //            val jsonStr=gson.toJson(appData)
 //            val app = saveTraceInfo(jsonStr)
             appData.saveSp()

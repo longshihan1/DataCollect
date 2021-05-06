@@ -1,4 +1,4 @@
-package com.longshihan.collect.control;
+package com.longshihan.collect.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,7 @@ import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
-
 import com.longshihan.collect.R;
-import com.longshihan.collect.control.SettingActivity;
 
 /**
  * @author longshihan

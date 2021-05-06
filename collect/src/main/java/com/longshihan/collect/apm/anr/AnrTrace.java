@@ -50,7 +50,7 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     public void dispatchBegin(long beginNs, long cpuBeginNs, long token) {
         super.dispatchBegin(beginNs, cpuBeginNs, token);
 
-        MatrixLog.v(TAG, "* [dispatchBegin] token:%s ", token);
+//        MatrixLog.v(TAG, "* [dispatchBegin] token:%s ", token);
         long cost = (System.nanoTime() - token) / Constants.TIME_MILLIS_TO_NANO;
         anrHandler.postDelayed(anrTask, Constants.DEFAULT_ANR - cost);
         lagHandler.postDelayed(lagTask, Constants.DEFAULT_NORMAL_LAG - cost);
@@ -60,9 +60,9 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     public void dispatchEnd(long beginNs, long cpuBeginMs, long endNs, long cpuEndMs, long token, boolean isVsyncFrame) {
         super.dispatchEnd(beginNs, cpuBeginMs, endNs, cpuEndMs, token, isVsyncFrame);
 
-            long cost = (endNs - beginNs) / Constants.TIME_MILLIS_TO_NANO;
-            MatrixLog.v(TAG, "[dispatchEnd] token:%s cost:%sms cpu:%sms usage:%s",
-                    token, cost, cpuEndMs - cpuBeginMs, Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, cost));
+//            long cost = (endNs - beginNs) / Constants.TIME_MILLIS_TO_NANO;
+//            MatrixLog.v(TAG, "[dispatchEnd] token:%s cost:%sms cpu:%sms usage:%s",
+//                    token, cost, cpuEndMs - cpuBeginMs, Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, cost));
 
         if (null != anrTask) {
             anrHandler.removeCallbacks(anrTask);
