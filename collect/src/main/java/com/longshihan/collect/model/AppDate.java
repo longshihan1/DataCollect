@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppDate implements Serializable {
-   public  List<TraceOriginInfo> dataList=new ArrayList<>();
+    public List<TraceOriginInfo> dataList = new ArrayList<>();
 
     public AppDate(List<TraceFPSInfo> traceFPSInfos,
                    List<TraceLifecycleInfo> traceLifecycleInfos,

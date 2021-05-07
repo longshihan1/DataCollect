@@ -12,6 +12,7 @@ import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
 import com.longshihan.collect.R;
 
 /**
@@ -41,7 +42,7 @@ public class LMenu extends LinearLayout {
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
-        vMenu=findViewById(R.id.menu);
+        vMenu = findViewById(R.id.menu);
         vMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

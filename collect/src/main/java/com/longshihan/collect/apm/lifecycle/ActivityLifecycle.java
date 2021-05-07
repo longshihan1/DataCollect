@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.longshihan.collect.control.TraceControl;
 import com.longshihan.collect.init.TraceManager;
+
 import java.util.ArrayList;
 import java.util.List;
 

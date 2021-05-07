@@ -18,7 +18,8 @@ abstract class LooperObserver {
         intendedFrameTimeNs: Long,
         inputCostNs: Long,
         animationCostNs: Long,
-        traversalCostNs: Long) {
+        traversalCostNs: Long
+    ) {
     }
 
     @CallSuper
@@ -28,7 +29,8 @@ abstract class LooperObserver {
         endNs: Long,
         cpuEndMs: Long,
         token: Long,
-        isVsyncFrame: Boolean) {
+        isVsyncFrame: Boolean
+    ) {
         isDispatchBegin = false
     }
 

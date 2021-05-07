@@ -28,7 +28,7 @@ import java.lang.reflect.Proxy;
  * Issue is that a closeable leak which we must avoid in our project.
  *
  * @author liyongjie
- *         Created by liyongjie on 2017/6/9.
+ * Created by liyongjie on 2017/6/9.
  */
 
 public final class CloseGuardHooker {
@@ -85,8 +85,8 @@ public final class CloseGuardHooker {
             }
 
             methodSetReporter.invoke(null, Proxy.newProxyInstance(classLoader,
-                new Class<?>[]{closeGuardReporterCls},
-                new IOCloseLeakDetector(sOriginalReporter)));
+                    new Class<?>[]{closeGuardReporterCls},
+                    new IOCloseLeakDetector(sOriginalReporter)));
 
             return true;
         } catch (Throwable e) {

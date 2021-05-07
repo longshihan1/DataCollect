@@ -20,13 +20,14 @@ import java.net.URLDecoder;
 public class HttpUtils {
 
 
-    public static String testConnectUrl(){
-        return "http://"+Config.INSTANCE.getHOST()+":8080/testConnect";
+    public static String testConnectUrl() {
+        return "http://" + Config.INSTANCE.getHOST() + ":8080/testConnect";
     }
 
-    public static String saveDataUrl(){
-        return "http://"+Config.INSTANCE.getHOST()+":8080/saveAppInfo";
+    public static String saveDataUrl() {
+        return "http://" + Config.INSTANCE.getHOST() + ":8080/saveAppInfo";
     }
+
     public static APP testConnect() {
         try {
             URL url = new URL(testConnectUrl());

@@ -208,8 +208,8 @@ public final class MatrixCloseGuard {
         }
 
         String message =
-            ("A resource was acquired at attached stack trace but never released. "
-                + "See java.io.Closeable for information on avoiding resource leaks.");
+                ("A resource was acquired at attached stack trace but never released. "
+                        + "See java.io.Closeable for information on avoiding resource leaks.");
 
         sREPORTER.report(message, allocationSite);
     }

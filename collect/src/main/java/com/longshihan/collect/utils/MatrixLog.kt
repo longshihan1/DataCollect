@@ -51,7 +51,10 @@ object MatrixLog {
             vararg params: Any?
         ) {
             var log =
-                if (params != null && params.isNotEmpty()) String.format(format!!, *params) else format
+                if (params != null && params.isNotEmpty()) String.format(
+                    format!!,
+                    *params
+                ) else format
             if (log == null) {
                 log = ""
             }
@@ -77,12 +80,14 @@ object MatrixLog {
             matrixLogImp!!.v(tag, msg, *obj)
         }
     }
+
     @JvmStatic
     fun e(tag: String?, msg: String?, vararg obj: Any?) {
         if (matrixLogImp != null) {
             matrixLogImp!!.e(tag, msg, *obj)
         }
     }
+
     @JvmStatic
     fun w(tag: String?, msg: String?, vararg obj: Any?) {
         if (matrixLogImp != null) {
@@ -96,12 +101,14 @@ object MatrixLog {
             matrixLogImp!!.i(tag, msg, *obj)
         }
     }
+
     @JvmStatic
     fun d(tag: String?, msg: String?, vararg obj: Any?) {
         if (matrixLogImp != null) {
             matrixLogImp!!.d(tag, msg, *obj)
         }
     }
+
     @JvmStatic
     fun printErrStackTrace(tag: String?, tr: Throwable?, format: String?, vararg obj: Any?) {
         if (matrixLogImp != null) {

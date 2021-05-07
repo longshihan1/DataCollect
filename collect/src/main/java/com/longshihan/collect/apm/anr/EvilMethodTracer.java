@@ -5,14 +5,16 @@ import android.util.Log;
 import com.longshihan.collect.apm.anr.task.AnalyseTask;
 import com.longshihan.collect.apm.fps.UIThreadMonitor;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
-import com.longshihan.collect.init.Utils;
+import com.longshihan.collect.init.TraceManager;
 import com.longshihan.collect.plugin.IPlugin;
 import com.longshihan.collect.traceTime.TraceTime;
 import com.longshihan.collect.utils.Constants;
+import com.longshihan.collect.utils.EvilSPUtils;
 import com.longshihan.collect.utils.MatrixHandlerThread;
-import com.longshihan.collect.utils.MatrixLog;
 
 import org.jetbrains.annotations.Nullable;
+
+import static com.longshihan.collect.utils.FileUtils.CheckOtherDate;
 
 /**
  * 慢方法追踪
@@ -20,18 +22,19 @@ import org.jetbrains.annotations.Nullable;
 public class EvilMethodTracer extends LooperObserver implements IPlugin {
     private static final String TAG = "Matrix.EvilMethodTracer";
     private long[] queueTypeCosts = new long[3];
-    private long evilThresholdMs=700;
+    private long evilThresholdMs = 700;
     private static EvilMethodTracer instance;
 
     public static EvilMethodTracer getInstance() {
-        if (instance==null){
-            instance=new EvilMethodTracer();
+        if (instance == null) {
+            instance = new EvilMethodTracer();
         }
         return instance;
     }
 
     @Override
     public void init() {
+        EvilSPUtils.defaultEvilinit(TraceManager.mContext, CheckOtherDate());
         UIThreadMonitor.getMonitor().addObserver(this);
     }
 
@@ -55,13 +58,15 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
         try {
             if (dispatchCost >= evilThresholdMs) {
 
-                Log.d("测试","evilThresholdMs"+queueTypeCosts[0]+":"+queueTypeCosts[1]+":"+queueTypeCosts[2]);
-                Log.d("测试","EvilMethodTracer:"+TraceTime.onFrameStack());
+                Log.d("测试", "evilThresholdMs" + queueTypeCosts[0] + ":" + queueTypeCosts[1] + ":" + queueTypeCosts[2]);
+                Log.d("测试", "EvilMethodTracer:" + TraceTime.onFrameStack());
+                EvilSPUtils.saveEvilValue(queueTypeCosts[0] + ":" + queueTypeCosts[1] + ":" + queueTypeCosts[2]);
+                EvilSPUtils.saveEvilValue(TraceTime.onFrameStack().toString());
                 //直接打标记
                 MatrixHandlerThread.getDefaultHandler().post(new AnalyseTask());
             }
         } finally {
-                String usage = Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, dispatchCost);
+//                String usage = Utils.calculateCpuUsage(cpuEndMs - cpuBeginMs, dispatchCost);
 //                MatrixLog.v(TAG, "[dispatchEnd] token:%s cost:%sms cpu:%sms usage:%s innerCost:%s",
 //                        token, dispatchCost, cpuEndMs - cpuBeginMs, usage, System.currentTimeMillis() - start);
 

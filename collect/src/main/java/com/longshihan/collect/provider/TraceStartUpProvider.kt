@@ -20,7 +20,7 @@ class TraceStartUpProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-       return null
+        return null
     }
 
     override fun onCreate(): Boolean {
@@ -32,13 +32,13 @@ class TraceStartUpProvider : ContentProvider() {
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
-       return null
+        return null
     }
 
     override fun update(
         uri: Uri, values: ContentValues?, selection: String?,
         selectionArgs: Array<String>?
     ): Int {
-      return 0
+        return 0
     }
 }

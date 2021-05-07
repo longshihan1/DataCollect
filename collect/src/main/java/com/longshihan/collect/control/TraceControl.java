@@ -29,8 +29,8 @@ public class TraceControl {
                 Utils.sdf.format(System.currentTimeMillis())));
     }
 
-    public static void saveFpsData(long inputCostNs,long animationCostNs,long traversalCostNs) {
-        traceFPSDataInfos.add(new TraceFPSDataInfo(inputCostNs,animationCostNs,traversalCostNs,
+    public static void saveFpsData(long inputCostNs, long animationCostNs, long traversalCostNs) {
+        traceFPSDataInfos.add(new TraceFPSDataInfo(inputCostNs, animationCostNs, traversalCostNs,
                 Utils.sdfTime.format(System.currentTimeMillis())));
     }
 

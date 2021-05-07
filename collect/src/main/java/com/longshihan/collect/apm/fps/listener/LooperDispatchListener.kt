@@ -10,13 +10,13 @@ abstract class LooperDispatchListener {
     open fun dispatchStart() {}
 
     @CallSuper
-    open  fun onDispatchStart(x: String?) {
+    open fun onDispatchStart(x: String?) {
         isHasDispatchStart = true
         dispatchStart()
     }
 
     @CallSuper
-    open  fun onDispatchEnd(x: String?) {
+    open fun onDispatchEnd(x: String?) {
         isHasDispatchStart = false
         dispatchEnd()
     }

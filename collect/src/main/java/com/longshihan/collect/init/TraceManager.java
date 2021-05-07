@@ -15,8 +15,8 @@ import com.longshihan.collect.apm.anr.EvilMethodTracer;
 import com.longshihan.collect.apm.fps.FPSPlugin;
 import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
-import com.longshihan.collect.ui.LMenu;
 import com.longshihan.collect.http.UploadUtils;
+import com.longshihan.collect.ui.LMenu;
 import com.longshihan.collect.utils.FileUtils;
 import com.longshihan.collect.utils.SPUtils;
 
@@ -57,9 +57,9 @@ public class TraceManager {
             //初始化MMKV
             SPUtils.defaultinit(mContext, FileUtils.CheckOtherDate());
             //FPS 启动
-           FPSPlugin.INSTANCE.init();
-           FPSPlugin.INSTANCE.start();
-           //Anr 和 Evil
+            FPSPlugin.INSTANCE.init();
+            FPSPlugin.INSTANCE.start();
+            //Anr 和 Evil
             AnrTrace.getInstance().init();
             AnrTrace.getInstance().start();
             EvilMethodTracer.getInstance().init();

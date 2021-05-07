@@ -4,9 +4,7 @@ import com.longshihan.collect.apm.fps.listener.FpsObserver
 import com.longshihan.collect.apm.fps.listener.LooperObserver
 import com.longshihan.collect.control.TraceControl
 import com.longshihan.collect.plugin.IPlugin
-import com.longshihan.collect.utils.Constants
 import com.longshihan.collect.utils.MatrixLog
-import com.longshihan.collect.utils.MatrixLog.i
 
 /**
  * FPS插件管理处
@@ -14,7 +12,7 @@ import com.longshihan.collect.utils.MatrixLog.i
  *          帧率三个时间
  *          message处理时间
  */
-object FPSPlugin :IPlugin{
+object FPSPlugin : IPlugin {
     override fun init() {
         try {
             UIThreadMonitor.getMonitor().init()
@@ -53,7 +51,7 @@ object FPSPlugin :IPlugin{
                     focusedActivity, startNs, endNs, isVsyncFrame, intendedFrameTimeNs,
                     inputCostNs, animationCostNs, traversalCostNs
                 )
-                TraceControl.saveFpsData(inputCostNs,animationCostNs,traversalCostNs)
+                TraceControl.saveFpsData(inputCostNs, animationCostNs, traversalCostNs)
             }
 
             override fun dispatchBegin(beginNs: Long, cpuBeginNs: Long, token: Long) {
@@ -72,7 +70,7 @@ object FPSPlugin :IPlugin{
             }
         })
 
-        ChoreographerHelp.addObserver(object :FpsObserver(){
+        ChoreographerHelp.addObserver(object : FpsObserver() {
             override fun frameCallback(count: Int) {
                 TraceControl.saveFps(count)
             }

@@ -16,6 +16,7 @@ public class MMAP {
 
     /**
      * 初始化
+     *
      * @param dir
      * @param fileName
      * @return 指针
@@ -24,6 +25,7 @@ public class MMAP {
 
     /**
      * 写入数据
+     *
      * @param logWriterObject
      * @param msgContent
      * @return
@@ -32,6 +34,7 @@ public class MMAP {
 
     /**
      * 关闭
+     *
      * @param logWriterObject
      */
     public static native void nativeCloseAndRenew(long logWriterObject);

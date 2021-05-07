@@ -1,6 +1,5 @@
 package com.longshihan.collect.utils
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.longshihan.mmap.MMAP
@@ -27,6 +26,7 @@ class SPUtils {
         fun defaultinit(context: Context, fileName: String) {
             fileId = MMAP.nativeInit(context.externalCacheDir?.absolutePath, fileName)
         }
+
         @JvmStatic
         fun save(fileId: Long, value: String) {
             MMAP.nativeWrite(fileId, "$value\r\n")

@@ -16,7 +16,7 @@ public class TraceStateInfo extends TraceOriginInfo implements Serializable {
         this.tag = tag;
         this.state = state;
         this.datetime = datetime;
-        dataType="state";
+        dataType = "state";
     }
 
 

@@ -13,7 +13,7 @@ public class TraceFPSDataInfo extends TraceOriginInfo implements Serializable {
     private long traversalCostNs;
     private String datetime;
 
-    public TraceFPSDataInfo(long inputCostNs,long animationCostNs,long traversalCostNs, String datetime) {
+    public TraceFPSDataInfo(long inputCostNs, long animationCostNs, long traversalCostNs, String datetime) {
         this.inputCostNs = inputCostNs;
         this.animationCostNs = animationCostNs;
         this.traversalCostNs = traversalCostNs;

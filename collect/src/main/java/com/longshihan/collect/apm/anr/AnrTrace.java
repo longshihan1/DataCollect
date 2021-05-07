@@ -6,11 +6,9 @@ import com.longshihan.collect.apm.anr.task.AnrHandleTask;
 import com.longshihan.collect.apm.anr.task.LagHandleTask;
 import com.longshihan.collect.apm.fps.UIThreadMonitor;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
-import com.longshihan.collect.init.Utils;
 import com.longshihan.collect.plugin.IPlugin;
 import com.longshihan.collect.utils.Constants;
 import com.longshihan.collect.utils.MatrixHandlerThread;
-import com.longshihan.collect.utils.MatrixLog;
 
 public class AnrTrace extends LooperObserver implements IPlugin {
 
@@ -23,8 +21,8 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     private static AnrTrace instance;
 
     public static AnrTrace getInstance() {
-        if (instance==null){
-            instance=new AnrTrace();
+        if (instance == null) {
+            instance = new AnrTrace();
         }
         return instance;
     }

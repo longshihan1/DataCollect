@@ -7,17 +7,16 @@ import com.longshihan.collect.utils.DeviceUtil;
 /**
  * Anr 收集器
  */
-public class AnrHandleTask implements Runnable{
+public class AnrHandleTask implements Runnable {
     public AnrHandleTask() {
     }
 
 
     @Override
     public void run() {
-        Log.d("测试","ANR");
+        Log.d("测试", "ANR");
 
     }
-
 
 
     private String printAnr(String scene, int[] processStat, long[] memoryInfo, Thread.State state, StringBuilder stack, boolean isForeground,

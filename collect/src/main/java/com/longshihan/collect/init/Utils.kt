@@ -7,8 +7,10 @@ import java.util.*
 object Utils {
     @JvmField
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
     @JvmField
     val sdfTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+
     @JvmField
     var timefilename: String? = null
 

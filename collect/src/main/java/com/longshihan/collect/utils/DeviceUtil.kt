@@ -303,10 +303,12 @@ object DeviceUtil {
         val runtime = Runtime.getRuntime()
         return (runtime.totalMemory() - runtime.freeMemory()) / 1024 //in KB
     }
+
     @JvmStatic
     fun getNativeHeap(): Long {
         return Debug.getNativeHeapAllocatedSize() / 1024 //in KB
     }
+
     @JvmStatic
     fun getVmSize(): Long {
         val status = String.format("/proc/%s/status", getAppId())

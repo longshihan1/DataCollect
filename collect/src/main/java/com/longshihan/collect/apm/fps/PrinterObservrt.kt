@@ -14,26 +14,30 @@ import com.longshihan.collect.utils.MatrixLog.w
 import com.longshihan.collect.utils.reflect.ReflectUtils
 import java.util.*
 
-class PrinterObservrt(private val looper: Looper=Looper.getMainLooper()) : MessageQueue.IdleHandler{
+class PrinterObservrt(private val looper: Looper = Looper.getMainLooper()) :
+    MessageQueue.IdleHandler {
     init {
         resetPrinter()
         addIdleHandler(looper)
     }
+
     private val TAG = "LooperMonitor"
     private var isReflectLoggingError = false
     private val listeners = HashSet<LooperDispatchListener>()
     private var lastCheckPrinterTime: Long = 0
     private val CHECK_TIME = 60 * 1000L
     private var printer: LooperPrinter? = null
-    companion object{
+
+    companion object {
         private val mainMonitor = PrinterObservrt()
+
         @JvmStatic
         fun register(listener: LooperDispatchListener) {
             mainMonitor.addListener(listener)
         }
 
         @JvmStatic
-        fun unregister(listener:LooperDispatchListener?) {
+        fun unregister(listener: LooperDispatchListener?) {
             mainMonitor.removeListener(listener)
         }
 
@@ -58,6 +62,7 @@ class PrinterObservrt(private val looper: Looper=Looper.getMainLooper()) : Messa
     fun removeListener(listener: LooperDispatchListener?) {
         synchronized(listeners) { listeners.remove(listener) }
     }
+
     @Synchronized
     private fun resetPrinter() {
         var originPrinter: Printer? = null
@@ -84,7 +89,7 @@ class PrinterObservrt(private val looper: Looper=Looper.getMainLooper()) : Messa
         looper.setMessageLogging(LooperPrinter(originPrinter).also {
             printer = it
         })
-        if (originPrinter!=null) {
+        if (originPrinter != null) {
 
             i(TAG, "reset printer, originPrinter[%s] in %s", originPrinter, looper.thread.name)
         }

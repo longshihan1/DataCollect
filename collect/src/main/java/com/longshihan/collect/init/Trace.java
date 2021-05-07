@@ -8,16 +8,16 @@ import com.longshihan.collect.utils.IDCreator;
  */
 public class Trace {
 
-    public static void initFirst(String clazzname,String methodName,String tag){
+    public static void initFirst(String clazzname, String methodName, String tag) {
         //获取当前线程，进程，时间,生成唯一id，方法调用
-        String id=IDCreator.INSTANCE.getID();
+        String id = IDCreator.INSTANCE.getID();
         //将id绑定调用链
-        TraceTime.saveLast(clazzname, methodName,tag);
+        TraceTime.saveLast(clazzname, methodName, tag);
     }
 
-    public static void initLast(String clazzname,String methodName,String tag){
+    public static void initLast(String clazzname, String methodName, String tag) {
 
-        TraceTime.saveFirst(clazzname, methodName,tag);
+        TraceTime.saveFirst(clazzname, methodName, tag);
 
     }
 }

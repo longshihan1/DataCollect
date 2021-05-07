@@ -5,9 +5,6 @@ import android.os.Handler
 import android.os.Message
 import android.view.Choreographer
 import com.longshihan.collect.apm.fps.listener.FpsObserver
-import com.longshihan.collect.apm.fps.listener.LooperObserver
-import com.longshihan.collect.control.TraceControl
-import com.longshihan.collect.utils.MatrixLog.d
 import java.util.*
 
 /**
@@ -17,7 +14,7 @@ object ChoreographerHelp : Choreographer.FrameCallback {
     var mFpsCount = 0
     private var mLastFrameTimeNanos: Long = 0 //最后一次时间
     private var mFrameTimeNanos: Long = 0 //本次的当前时间
-    private var observers :FpsObserver?=null
+    private var observers: FpsObserver? = null
     fun start() {
         //启动一秒循环器的数据
         handler.sendEmptyMessage(1)
@@ -25,7 +22,7 @@ object ChoreographerHelp : Choreographer.FrameCallback {
     }
 
     fun addObserver(observer: FpsObserver) {
-        observers=observer
+        observers = observer
     }
 
 

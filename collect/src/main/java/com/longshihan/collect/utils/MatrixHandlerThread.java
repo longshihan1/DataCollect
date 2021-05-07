@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Printer;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -71,7 +72,7 @@ public class MatrixHandlerThread {
         return defaultHandler;
     }
 
-    public static HandlerThread getNewHandlerThread(String name,int priority) {
+    public static HandlerThread getNewHandlerThread(String name, int priority) {
         for (Iterator<HandlerThread> i = handlerThreads.iterator(); i.hasNext(); ) {
             HandlerThread element = i.next();
             if (!element.isAlive()) {

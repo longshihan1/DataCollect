@@ -17,10 +17,9 @@
 package com.longshihan.collect.apm.io.detect;
 
 import com.longshihan.collect.utils.IOCanaryUtil;
+import com.longshihan.collect.utils.IOSPUtils;
 import com.longshihan.collect.utils.MatrixLog;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -54,6 +53,7 @@ public class IOCloseLeakDetector implements InvocationHandler {
 
             String stackKey = IOCanaryUtil.getThrowableStack(throwable);
             MatrixLog.e(TAG, stackKey);
+            IOSPUtils.saveIOValue(stackKey);
             return null;
         }
         return method.invoke(originalReporter, args);
