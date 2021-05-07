@@ -22,7 +22,9 @@ public class AppDate implements Serializable {
     }
 
     public void saveSp() {
-        SPUtils.appendTrace(JsonUtils.INSTANCE.getGosn().toJson(dataList));
+        if (dataList.size()>0) {
+            SPUtils.appendTrace(JsonUtils.INSTANCE.getGosn().toJson(dataList));
+        }
     }
 
     public void clear() {

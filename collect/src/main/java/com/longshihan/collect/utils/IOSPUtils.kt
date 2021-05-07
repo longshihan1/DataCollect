@@ -14,7 +14,7 @@ object IOSPUtils {
      */
     @JvmStatic
     fun defaultIOinit(context: Context, fileName: String) {
-        iOfileId = SPUtils.init(context, fileName + "IO")
+        iOfileId = SPUtils.init(context, fileName + "_io")
     }
 
     /**

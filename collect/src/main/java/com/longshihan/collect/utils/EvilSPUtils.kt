@@ -15,7 +15,7 @@ object EvilSPUtils {
      */
     @JvmStatic
     fun defaultEvilinit(context: Context, fileName: String) {
-        evilfileId = SPUtils.init(context, fileName + "IO")
+        evilfileId = SPUtils.init(context, fileName + "_evil")
     }
 
     /**
