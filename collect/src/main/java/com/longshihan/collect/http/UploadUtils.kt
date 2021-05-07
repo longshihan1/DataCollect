@@ -16,7 +16,7 @@ object UploadUtils {
     private val mHandlerThread = HandlerThread("LDataCollect")
     const val loginWhat = 10001
     const val msgWhat = 10002
-    const val deleyTime = 5000L
+    const val deleyTime = 2000L
     private lateinit var handler: WorkHandler
 
     fun init() {
@@ -51,8 +51,7 @@ object UploadUtils {
             val fpsList = TraceControl.traceFPSInfos
 //            val gson=Gson()
             val appData = AppDate(fpsList, lifecycleList, traceList)
-            TraceControl.clearList()
-//            Log.d("测试00",appData.dataList.size.toString())
+            Log.d("测试00",appData.dataList.size.toString())
 //            val jsonStr=gson.toJson(appData)
 //            val app = saveTraceInfo(jsonStr)
             appData.saveSp()

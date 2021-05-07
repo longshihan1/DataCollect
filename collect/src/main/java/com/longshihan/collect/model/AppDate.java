@@ -19,6 +19,9 @@ public class AppDate implements Serializable {
         dataList.addAll(traceFPSInfos);
         dataList.addAll(traceLifecycleInfos);
         dataList.addAll(traceTimeInfos);
+        traceFPSInfos.clear();
+        traceLifecycleInfos.clear();
+        traceTimeInfos.clear();
     }
 
     public void saveSp() {
