@@ -22,7 +22,7 @@ import static com.longshihan.collect.utils.FileUtils.CheckOtherDate;
 public class EvilMethodTracer extends LooperObserver implements IPlugin {
     private static final String TAG = "Matrix.EvilMethodTracer";
     private long[] queueTypeCosts = new long[3];
-    private long evilThresholdMs = 700;
+    public static long evilThresholdMs = 700;
     private static EvilMethodTracer instance;
 
     public static EvilMethodTracer getInstance() {
@@ -34,6 +34,7 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
 
     @Override
     public void init() {
+        evilThresholdMs = TraceManager.settingInfo.getEvilTime();
         EvilMMAPUtils.defaultEvilinit(TraceManager.mContext, CheckOtherDate());
         UIThreadMonitor.getMonitor().addObserver(this);
     }
@@ -93,5 +94,10 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
     @Override
     public void destory() {
         UIThreadMonitor.getMonitor().removeObserver(this);
+    }
+
+    @Override
+    public boolean getState() {
+        return false;
     }
 }

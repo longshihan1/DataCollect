@@ -14,7 +14,7 @@
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp">
 
             <EditText
                     android:id="@+id/edit_host"
@@ -25,8 +25,8 @@
             <TextView
                     android:id="@+id/l_savehost"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="修改上传地址" />
         </LinearLayout>
 
@@ -183,11 +183,13 @@
                 android:layout_height="50dp">
 
             <EditText
+                    android:id="@+id/ltransform_anredit"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="50dp" />
 
             <TextView
+                    android:id="@+id/ltransform_anrtv"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:text="修改ANR时间"
@@ -201,11 +203,13 @@
                 android:layout_height="50dp">
 
             <EditText
+                    android:id="@+id/ltransform_eviledit"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="50dp" />
 
             <TextView
+                    android:id="@+id/ltransform_eviltv"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:text="修改慢方法时间"

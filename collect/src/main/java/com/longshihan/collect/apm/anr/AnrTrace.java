@@ -6,6 +6,7 @@ import com.longshihan.collect.apm.anr.task.AnrHandleTask;
 import com.longshihan.collect.apm.anr.task.LagHandleTask;
 import com.longshihan.collect.apm.fps.UIThreadMonitor;
 import com.longshihan.collect.apm.fps.listener.LooperObserver;
+import com.longshihan.collect.init.TraceManager;
 import com.longshihan.collect.plugin.IPlugin;
 import com.longshihan.collect.utils.Constants;
 import com.longshihan.collect.utils.MatrixHandlerThread;
@@ -35,6 +36,7 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     @Override
     public void init() {
         UIThreadMonitor.getMonitor().addObserver(this);
+        Constants.DEFAULT_ANR= TraceManager.settingInfo.getAnrTime();
         this.anrHandler = new Handler(MatrixHandlerThread.getDefaultHandler().getLooper());
         this.lagHandler = new Handler(MatrixHandlerThread.getDefaultHandler().getLooper());
     }
@@ -80,5 +82,10 @@ public class AnrTrace extends LooperObserver implements IPlugin {
         UIThreadMonitor.getMonitor().removeObserver(this);
         anrHandler.removeCallbacksAndMessages(null);
         lagHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public boolean getState() {
+        return false;
     }
 }

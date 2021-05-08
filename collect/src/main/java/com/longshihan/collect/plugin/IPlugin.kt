@@ -8,4 +8,5 @@ interface IPlugin {
     fun start()
     fun stop()
     fun destory()
+    fun getState():Boolean
 }

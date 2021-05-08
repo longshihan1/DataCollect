@@ -56,7 +56,7 @@ public class TraceManager {
             mContext = context;
             sharePreferenceUtils = new SharePreferenceUtils(context);
             settingInfo = SettingInfo.Companion.getInfo();
-
+            Config.INSTANCE.setHOST(settingInfo.getIpAdress());
             Log.d("测试", "进来了");
             //绑定生命周期
             if (context instanceof Application) {
@@ -78,7 +78,9 @@ public class TraceManager {
             EvilMethodTracer.getInstance().start();
             //IO
             IOPlugin.INSTANCE.init();
-            IOPlugin.INSTANCE.start();
+            if (settingInfo.getBIO()) {
+                IOPlugin.INSTANCE.start();
+            }
             //创建本地数据库
             //创建上传线程
             UploadUtils.INSTANCE.init();

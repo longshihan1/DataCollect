@@ -6,12 +6,12 @@ import org.json.JSONObject
 
 
 data class SettingInfo(
-    val bthreadStack: Boolean = false,
-    val bjvmti: Boolean = false,
-    val bIO: Boolean = true,
-    val ipAdress: String = "",
-    val anrTime: Long = 5000L,
-    val evilTime: Long = 5000L
+    var bthreadStack: Boolean = false,
+    var bjvmti: Boolean = false,
+    var bIO: Boolean = true,
+    var ipAdress: String = "",
+    var anrTime: Long = 5000L,
+    var evilTime: Long = 700L
 ) {
     fun saveJson() {
         val jsonObject = JSONObject()

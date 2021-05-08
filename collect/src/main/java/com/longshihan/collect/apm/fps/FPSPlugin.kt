@@ -86,4 +86,8 @@ object FPSPlugin : IPlugin {
     override fun destory() {
         TODO("Not yet implemented")
     }
+
+    override fun getState(): Boolean {
+        return false
+    }
 }

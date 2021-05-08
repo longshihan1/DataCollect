@@ -26,4 +26,8 @@ object IOPlugin : IPlugin {
     override fun destory() {
 
     }
+
+    override fun getState(): Boolean {
+        return mCore!!.isStart
+    }
 }

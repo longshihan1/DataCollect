@@ -12,7 +12,8 @@ object Constants {
     const val DEFAULT_FPS_TIME_SLICE_ALIVE_MS = 10 * 1000
     const val TIME_MILLIS_TO_NANO = 1000000
     const val DEFAULT_INPUT_EXPIRED_TIME = 500
-    const val DEFAULT_ANR = 5 * 1000
+    @JvmField
+    var DEFAULT_ANR = 5 * 1000L
     const val DEFAULT_NORMAL_LAG = 2 * 1000
     const val DEFAULT_ANR_INVALID = 6 * 1000
     const val DEFAULT_FRAME_DURATION = 16666667L
