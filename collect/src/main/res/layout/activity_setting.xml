@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -9,60 +9,209 @@
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-                android:id="@+id/edit_host"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="50dp" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-                android:id="@+id/l_savehost"
-                android:layout_width="wrap_content"
+            <EditText
+                    android:id="@+id/edit_host"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp" />
+
+            <TextView
+                    android:id="@+id/l_savehost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="修改上传地址" />
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                android:text="修改上传地址" />
+            <TextView
+                    android:id="@+id/l_testconnect"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="测试联通" />
+
+            <TextView
+                    android:id="@+id/l_openupload"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="开启上传"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/l_openfps"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="FPS打印"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/l_openprinter"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Hnadler 打印"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/l_openanr"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="ANR打印"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                <Switch
+                        android:id="@+id/ltransform_thread"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开启线程堆栈输出" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                <Switch
+                        android:id="@+id/ltransform_jvmti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开启JVMTI方法获取" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                <Switch
+                        android:id="@+id/ltransform_io"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开启IO监听" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-------" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp" />
+
+            <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="修改ANR时间"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp" />
+
+            <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="修改慢方法时间"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorPrimary" />
+        </LinearLayout>
     </LinearLayout>
-
-    <TextView
-            android:id="@+id/l_testconnect"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="@color/colorAccent"
-            android:text="测试联通" />
-
-    <TextView
-            android:id="@+id/l_openupload"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="开启上传"
-            android:gravity="center"
-            android:textColor="#ffffff" />
-    <TextView
-            android:id="@+id/l_openfps"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="FPS打印"
-            android:gravity="center"
-            android:textColor="#ffffff" />
-    <TextView
-            android:id="@+id/l_openprinter"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Hnadler 打印"
-            android:gravity="center"
-            android:textColor="#ffffff" />
-    <TextView
-            android:id="@+id/l_openanr"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="ANR打印"
-            android:gravity="center"
-            android:textColor="#ffffff" />
-</LinearLayout>
+</ScrollView>
