@@ -1,6 +1,7 @@
 package com.longshihan.collect.utils
 
 object Constants {
+    const val SETTINGINFO="SETTINGINFO"
     const val BUFFER_SIZE = 100 * 10000 // 7.6M
 
     const val TIME_UPDATE_CYCLE_MS = 5

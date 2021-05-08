@@ -4,7 +4,7 @@ import com.longshihan.collect.model.fps.TraceFPSInfo;
 import com.longshihan.collect.model.lifecycle.TraceLifecycleInfo;
 import com.longshihan.collect.model.time.TraceTimeInfo;
 import com.longshihan.collect.utils.JsonUtils;
-import com.longshihan.collect.utils.SPUtils;
+import com.longshihan.collect.utils.data.MMAPUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class AppDate implements Serializable {
 
     public void saveSp() {
         if (dataList.size()>0) {
-            SPUtils.appendTrace(JsonUtils.INSTANCE.getGosn().toJson(dataList));
+            MMAPUtils.appendTrace(JsonUtils.INSTANCE.getGosn().toJson(dataList));
         }
     }
 

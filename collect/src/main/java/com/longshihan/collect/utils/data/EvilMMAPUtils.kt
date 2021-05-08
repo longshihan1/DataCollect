@@ -1,4 +1,4 @@
-package com.longshihan.collect.utils
+package com.longshihan.collect.utils.data
 
 import android.content.Context
 import com.longshihan.collect.init.Utils
@@ -6,7 +6,7 @@ import com.longshihan.collect.init.Utils
 /**
  * 处理慢方法异常的日志文件
  */
-object EvilSPUtils {
+object EvilMMAPUtils {
 
     var evilfileId = 0L;
 
@@ -15,7 +15,7 @@ object EvilSPUtils {
      */
     @JvmStatic
     fun defaultEvilinit(context: Context, fileName: String) {
-        evilfileId = SPUtils.init(context, fileName + "_evil")
+        evilfileId = MMAPUtils.init(context, fileName + "_evil")
     }
 
     /**
@@ -24,7 +24,7 @@ object EvilSPUtils {
     @JvmStatic
     fun saveEvilValue(value: String) {
         val tempStr= Utils.sdf.format(System.currentTimeMillis())+value+"/n"
-        SPUtils.save(evilfileId, value)
+        MMAPUtils.save(evilfileId, value)
     }
 
 }

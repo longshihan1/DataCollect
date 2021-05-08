@@ -1,4 +1,4 @@
-package com.longshihan.collect.utils
+package com.longshihan.collect.utils.data
 
 import android.content.Context
 import android.util.Log
@@ -7,7 +7,7 @@ import com.longshihan.mmap.MMAP
 /**
  * 文件存储相关
  */
-class SPUtils {
+class MMAPUtils {
     companion object {
         var fileId = 0L;
 

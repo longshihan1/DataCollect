@@ -9,7 +9,7 @@ import com.longshihan.collect.init.TraceManager;
 import com.longshihan.collect.plugin.IPlugin;
 import com.longshihan.collect.traceTime.TraceTime;
 import com.longshihan.collect.utils.Constants;
-import com.longshihan.collect.utils.EvilSPUtils;
+import com.longshihan.collect.utils.data.EvilMMAPUtils;
 import com.longshihan.collect.utils.MatrixHandlerThread;
 
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +34,7 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
 
     @Override
     public void init() {
-        EvilSPUtils.defaultEvilinit(TraceManager.mContext, CheckOtherDate());
+        EvilMMAPUtils.defaultEvilinit(TraceManager.mContext, CheckOtherDate());
         UIThreadMonitor.getMonitor().addObserver(this);
     }
 
@@ -60,8 +60,8 @@ public class EvilMethodTracer extends LooperObserver implements IPlugin {
 
                 Log.d("测试", "evilThresholdMs" + queueTypeCosts[0] + ":" + queueTypeCosts[1] + ":" + queueTypeCosts[2]);
                 Log.d("测试", "EvilMethodTracer:" + TraceTime.onFrameStack());
-                EvilSPUtils.saveEvilValue(queueTypeCosts[0] + ":" + queueTypeCosts[1] + ":" + queueTypeCosts[2]);
-                EvilSPUtils.saveEvilValue(TraceTime.onFrameStack().toString());
+                EvilMMAPUtils.saveEvilValue(queueTypeCosts[0] + ":" + queueTypeCosts[1] + ":" + queueTypeCosts[2]);
+                EvilMMAPUtils.saveEvilValue(TraceTime.onFrameStack().toString());
                 //直接打标记
                 MatrixHandlerThread.getDefaultHandler().post(new AnalyseTask());
             }

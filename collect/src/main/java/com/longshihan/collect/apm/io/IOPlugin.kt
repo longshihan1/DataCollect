@@ -5,12 +5,12 @@ import com.longshihan.collect.init.TraceManager
 import com.longshihan.collect.plugin.IPlugin
 import com.longshihan.collect.utils.FileUtils.Companion.CheckOtherDate
 import com.longshihan.collect.utils.IOCanaryUtil
-import com.longshihan.collect.utils.IOSPUtils
+import com.longshihan.collect.utils.data.IOMMAPUtils
 
 object IOPlugin : IPlugin {
     var mCore: IOCanaryCore? = null
     override fun init() {
-        IOSPUtils.defaultIOinit(TraceManager.mContext, CheckOtherDate())
+        IOMMAPUtils.defaultIOinit(TraceManager.mContext, CheckOtherDate())
         IOCanaryUtil.setPackageName(TraceManager.mContext)
         mCore = IOCanaryCore(this)
     }

@@ -17,14 +17,23 @@ import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.http.UploadUtils;
 import com.longshihan.collect.ui.LMenu;
+import com.longshihan.collect.ui.model.SettingInfo;
 import com.longshihan.collect.utils.FileUtils;
-import com.longshihan.collect.utils.SPUtils;
+import com.longshihan.collect.utils.JsonUtils;
+import com.longshihan.collect.utils.data.MMAPUtils;
+import com.longshihan.collect.utils.data.SharePreferenceUtils;
+
+import org.json.JSONObject;
+
+import static com.longshihan.collect.utils.Constants.SETTINGINFO;
 
 /**
  * App启动的时候唤醒，初始化相关数据和建立文件，创建连接
  */
 public class TraceManager {
     private static TraceManager instance;
+    public static SharePreferenceUtils sharePreferenceUtils;
+    public static SettingInfo settingInfo;
     private LMenu menu;
     public static Context mContext;
 
@@ -45,6 +54,9 @@ public class TraceManager {
     public static void init(Context context) {
         try {
             mContext = context;
+            sharePreferenceUtils = new SharePreferenceUtils(context);
+            settingInfo = SettingInfo.Companion.getInfo();
+
             Log.d("测试", "进来了");
             //绑定生命周期
             if (context instanceof Application) {
@@ -55,7 +67,7 @@ public class TraceManager {
                 TraceManager.getInstance().showMenu(context);
             }
             //初始化MMKV
-            SPUtils.defaultinit(mContext, FileUtils.CheckOtherDate());
+            MMAPUtils.defaultinit(mContext, FileUtils.CheckOtherDate());
             //FPS 启动
             FPSPlugin.INSTANCE.init();
             FPSPlugin.INSTANCE.start();

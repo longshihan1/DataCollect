@@ -1,4 +1,4 @@
-package com.longshihan.collect.utils
+package com.longshihan.collect.utils.data
 
 import android.content.Context
 import com.longshihan.collect.init.Utils
@@ -6,7 +6,7 @@ import com.longshihan.collect.init.Utils
 /**
  * 处理IO异常的日志文件
  */
-object IOSPUtils {
+object IOMMAPUtils {
     var iOfileId = 0L;
 
     /**
@@ -14,7 +14,7 @@ object IOSPUtils {
      */
     @JvmStatic
     fun defaultIOinit(context: Context, fileName: String) {
-        iOfileId = SPUtils.init(context, fileName + "_io")
+        iOfileId = MMAPUtils.init(context, fileName + "_io")
     }
 
     /**
@@ -23,7 +23,7 @@ object IOSPUtils {
     @JvmStatic
     fun saveIOValue(value: String) {
         val tempStr= Utils.sdf.format(System.currentTimeMillis())+value+"/n"
-        SPUtils.save(iOfileId, tempStr)
+        MMAPUtils.save(iOfileId, tempStr)
     }
 
 }
