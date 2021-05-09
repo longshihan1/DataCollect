@@ -11,21 +11,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.longshihan.collect.apm.anr.AnrTrace;
-import com.longshihan.collect.apm.anr.EvilMethodTracer;
 import com.longshihan.collect.apm.fps.FPSPlugin;
 import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.http.UploadUtils;
 import com.longshihan.collect.ui.LMenu;
 import com.longshihan.collect.ui.model.SettingInfo;
+import com.longshihan.collect.ui.time.CurrentTimeUtils;
 import com.longshihan.collect.utils.FileUtils;
-import com.longshihan.collect.utils.JsonUtils;
 import com.longshihan.collect.utils.data.MMAPUtils;
 import com.longshihan.collect.utils.data.SharePreferenceUtils;
-
-import org.json.JSONObject;
-
-import static com.longshihan.collect.utils.Constants.SETTINGINFO;
 
 /**
  * App启动的时候唤醒，初始化相关数据和建立文件，创建连接
@@ -54,6 +49,7 @@ public class TraceManager {
     public static void init(Context context) {
         try {
             mContext = context;
+            CurrentTimeUtils.getInstance().init();
             sharePreferenceUtils = new SharePreferenceUtils(context);
             settingInfo = SettingInfo.Companion.getInfo();
             Config.INSTANCE.setHOST(settingInfo.getIpAdress());
@@ -74,8 +70,6 @@ public class TraceManager {
             //Anr 和 Evil
             AnrTrace.getInstance().init();
             AnrTrace.getInstance().start();
-            EvilMethodTracer.getInstance().init();
-            EvilMethodTracer.getInstance().start();
             //IO
             IOPlugin.INSTANCE.init();
             if (settingInfo.getBIO()) {
