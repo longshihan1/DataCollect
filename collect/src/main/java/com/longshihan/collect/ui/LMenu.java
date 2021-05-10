@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
@@ -24,7 +25,11 @@ public class LMenu extends LinearLayout {
     private WindowManager windowManager;
     private WindowManager.LayoutParams params = new WindowManager.LayoutParams();
     private int touchSlop;
-    private int y;
+    private int showY;
+    private float mTouchStartX;
+    private float mTouchStartY;
+    private float x;
+    private float y;
 
     public LMenu(Context context) {
         super(context);
@@ -38,7 +43,7 @@ public class LMenu extends LinearLayout {
         super(context);
         inflate(context, R.layout.l_menu_layout, this);
         setGravity(Gravity.CENTER_VERTICAL);
-        this.y = y;
+        this.showY = y;
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
@@ -64,9 +69,42 @@ public class LMenu extends LinearLayout {
         params.format = PixelFormat.TRANSLUCENT;
         params.gravity = Gravity.TOP | Gravity.LEFT;
         params.x = 10;
-        params.y = y;
+        params.y = showY;
         return params;
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //获取相对屏幕的坐标，即以屏幕左上角为原点
+        x = event.getRawX();
+        y = (int) (event.getRawY()-25);   //25是系统状态栏的高度
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //获取相对View的坐标，即以此View左上角为原点
+                mTouchStartX =  event.getX();
+                mTouchStartY =  event.getY();
+
+                break;
+            case MotionEvent.ACTION_MOVE:
+                updateViewPosition();
+                break;
+
+            case MotionEvent.ACTION_UP:
+                updateViewPosition();
+                mTouchStartX=mTouchStartY=0;
+                break;
+        }
+        return true;
+    }
+
+    private void updateViewPosition(){
+        //更新浮动窗口位置参数
+        params.x=(int)( x-mTouchStartX);
+        params.y=(int) (y-mTouchStartY);
+        windowManager.updateViewLayout(this, params);
+
+    }
+
 
     public void show() {
         try {

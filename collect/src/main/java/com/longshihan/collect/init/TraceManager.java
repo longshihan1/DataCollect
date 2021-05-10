@@ -15,7 +15,7 @@ import com.longshihan.collect.apm.fps.FPSPlugin;
 import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.http.UploadUtils;
-import com.longshihan.collect.ui.LMenu;
+import com.longshihan.collect.ui.FloatView;
 import com.longshihan.collect.ui.model.SettingInfo;
 import com.longshihan.collect.ui.time.CurrentTimeUtils;
 import com.longshihan.collect.utils.FileUtils;
@@ -29,7 +29,7 @@ public class TraceManager {
     private static TraceManager instance;
     public static SharePreferenceUtils sharePreferenceUtils;
     public static SettingInfo settingInfo;
-    private LMenu menu;
+    private FloatView menu;
     public static Context mContext;
 
     private TraceManager() {
@@ -97,7 +97,7 @@ public class TraceManager {
             }
         }
         if (menu == null) {
-            menu = new LMenu(context, y);
+            menu = new FloatView(context);
         }
         if (!menu.isShown()) {
             menu.show();

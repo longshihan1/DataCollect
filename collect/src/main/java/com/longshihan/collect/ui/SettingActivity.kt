@@ -3,7 +3,7 @@ package com.longshihan.collect.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.longshihan.collect.R
-import com.longshihan.collect.apm.anr.EvilMethodTracer.evilThresholdMs
+import com.longshihan.collect.apm.anr.AnrTrace.evilThresholdMs
 import com.longshihan.collect.apm.io.IOPlugin
 import com.longshihan.collect.http.UploadUtils
 import com.longshihan.collect.init.Config
