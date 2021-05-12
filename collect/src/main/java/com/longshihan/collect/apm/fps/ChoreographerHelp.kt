@@ -21,6 +21,7 @@ object ChoreographerHelp : Choreographer.FrameCallback {
         Choreographer.getInstance().postFrameCallback(this)
     }
 
+    //这里需要是一个list
     fun addObserver(observer: FpsObserver) {
         observers = observer
     }

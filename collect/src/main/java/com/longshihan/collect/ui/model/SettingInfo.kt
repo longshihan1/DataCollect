@@ -11,7 +11,8 @@ data class SettingInfo(
     var bIO: Boolean = true,
     var ipAdress: String = "",
     var anrTime: Long = 5000L,
-    var evilTime: Long = 700L
+    var evilTime: Long = 700L,
+    var bShowFps:Boolean=false
 ) {
     fun saveJson() {
         val jsonObject = JSONObject()
@@ -21,6 +22,7 @@ data class SettingInfo(
         jsonObject.put("ipAdress", ipAdress)
         jsonObject.put("anrTime", anrTime)
         jsonObject.put("evilTime", evilTime)
+        jsonObject.put("bShowFps",bShowFps)
         TraceManager.sharePreferenceUtils.setString(Constants.SETTINGINFO, jsonObject.toString())
     }
 
@@ -37,7 +39,8 @@ data class SettingInfo(
                     jsonObject.getBoolean("bIO"),
                     jsonObject.getString("ipAdress"),
                     jsonObject.getLong("anrTime"),
-                    jsonObject.getLong("evilTime")
+                    jsonObject.getLong("evilTime"),
+                    jsonObject.getBoolean("bShowFps")
                 )
             }
         }

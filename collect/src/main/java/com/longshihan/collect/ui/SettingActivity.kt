@@ -9,7 +9,6 @@ import com.longshihan.collect.http.UploadUtils
 import com.longshihan.collect.init.Config
 import com.longshihan.collect.init.TraceManager
 import com.longshihan.collect.utils.Constants.DEFAULT_ANR
-import com.longshihan.collect.utils.data.SharePreferenceUtils
 import kotlinx.android.synthetic.main.activity_setting.*
 
 //需要在写一个sp
@@ -55,6 +54,12 @@ class SettingActivity : AppCompatActivity() {
         ltransform_eviltv.setOnClickListener {
             val evilTime = ltransform_eviledit.text.toString().toLong()
             settingInfo.evilTime = evilTime
+            settingInfo.saveJson()
+        }
+
+        ltransform_floatview.isChecked = settingInfo.bShowFps
+        ltransform_floatview.setOnCheckedChangeListener { buttonView, isChecked ->
+            settingInfo.bShowFps = isChecked
             settingInfo.saveJson()
         }
 

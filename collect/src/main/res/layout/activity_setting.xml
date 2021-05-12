@@ -168,13 +168,14 @@
                     android:orientation="vertical">
 
                 <Switch
+                        android:id="@+id/ltransform_floatview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="-------" />
+                        android:text="显示帧率" />
             </LinearLayout>
         </LinearLayout>
 

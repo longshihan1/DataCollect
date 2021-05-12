@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -11,6 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.longshihan.collect.R;
+import com.longshihan.collect.apm.fps.ChoreographerHelp;
+import com.longshihan.collect.apm.fps.listener.FpsObserver;
 import com.longshihan.collect.init.TraceManager;
 import com.longshihan.collect.utils.DensityUtil;
 
@@ -20,6 +23,7 @@ public class FloatView extends TextView {
     private float mTouchStartY;
     private float x;
     private float y;
+    boolean showBg;
 
     private WindowManager wm = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
     private WindowManager.LayoutParams params;
@@ -28,6 +32,14 @@ public class FloatView extends TextView {
         super(context);
         params = new WindowManager.LayoutParams(DensityUtil.INSTANCE.px2dip(TraceManager.mContext, 20)
                 , DensityUtil.INSTANCE.px2dip(TraceManager.mContext, 20));
+        setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
+        ChoreographerHelp.INSTANCE.addObserver(new FpsObserver() {
+            @Override
+            public void frameCallback(int count) {
+                super.frameCallback(count);
+                setTextStr(count+"");
+            }
+        });
     }
 
     @Override
@@ -52,6 +64,20 @@ public class FloatView extends TextView {
                 break;
         }
         return true;
+    }
+
+    public void setTextStr(String value){
+        if (!showBg) {
+            setText(value);
+        }
+    }
+
+    public void configText(boolean showBg){
+        if (showBg){
+            setBackgroundResource(R.drawable.ltransformmenu);
+        }else {
+            setBackground(null);
+        }
     }
 
     private void updateViewPosition() {

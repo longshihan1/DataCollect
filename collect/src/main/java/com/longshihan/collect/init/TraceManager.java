@@ -98,6 +98,8 @@ public class TraceManager {
         }
         if (menu == null) {
             menu = new FloatView(context);
+        } else {
+            menu.configText(settingInfo.getBShowFps());
         }
         if (!menu.isShown()) {
             menu.show();
