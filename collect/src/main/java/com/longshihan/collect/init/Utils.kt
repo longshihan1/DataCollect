@@ -1,10 +1,42 @@
 package com.longshihan.collect.init
 
+import android.content.Context
+import android.content.res.Resources
+import android.util.DisplayMetrics
+import android.util.TypedValue
+import android.view.WindowManager
 import com.longshihan.collect.utils.DeviceUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 object Utils {
+    fun dip2px(dp: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dp,
+            Resources.getSystem().getDisplayMetrics()
+        )
+    }
+
+    @JvmStatic
+    fun getScreenWidth(context: Context): Int {
+        var width = 0
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val dm = DisplayMetrics()
+        wm.defaultDisplay.getMetrics(dm)
+        width = dm.widthPixels
+        return width
+    }
+
+    @JvmStatic
+    fun getScreenHeight(context: Context): Int {
+        var height = 0
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val dm = DisplayMetrics()
+        wm.defaultDisplay.getMetrics(dm)
+        height = dm.heightPixels
+        return height
+    }
     @JvmField
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 

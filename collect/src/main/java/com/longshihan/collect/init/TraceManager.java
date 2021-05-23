@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.longshihan.collect.apm.anr.AnrTrace;
@@ -16,6 +17,7 @@ import com.longshihan.collect.apm.io.IOPlugin;
 import com.longshihan.collect.apm.lifecycle.ActivityLifecycle;
 import com.longshihan.collect.http.UploadUtils;
 import com.longshihan.collect.ui.FloatView;
+import com.longshihan.collect.ui.SettingActivity;
 import com.longshihan.collect.ui.model.SettingInfo;
 import com.longshihan.collect.ui.time.CurrentTimeUtils;
 import com.longshihan.collect.utils.FileUtils;
@@ -55,13 +57,19 @@ public class TraceManager {
             Config.INSTANCE.setHOST(settingInfo.getIpAdress());
             Log.d("测试", "进来了");
             //绑定生命周期
-            if (context instanceof Application) {
-                Log.d("测试", "进来了1");
-                ((Application) context).registerActivityLifecycleCallbacks(new ActivityLifecycle());
-            } else {
-                Log.d("测试", "进来了2");
+            try {
+                if (context instanceof Application) {
+//                    Log.d("测试", "进来了1");
+//                    ((Application) context).registerActivityLifecycleCallbacks(new ActivityLifecycle());
+                } else {
+//                    Log.d("测试", "进来了2");
+//                    TraceManager.getInstance().showMenu(context);
+                }
                 TraceManager.getInstance().showMenu(context);
+            }catch (Exception e){
+                e.printStackTrace();
             }
+
             //初始化MMKV
             MMAPUtils.defaultinit(mContext, FileUtils.CheckOtherDate());
             //FPS 启动
@@ -98,6 +106,12 @@ public class TraceManager {
         }
         if (menu == null) {
             menu = new FloatView(context);
+            menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TraceManager.mContext.startActivity(new Intent(TraceManager.mContext, SettingActivity.class));
+                }
+            });
         } else {
             menu.configText(settingInfo.getBShowFps());
         }

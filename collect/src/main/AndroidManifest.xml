@@ -3,12 +3,12 @@
     package="com.longshihan.collect">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <application>
-        <activity android:name=".ui.SettingActivity"></activity>
+        <activity android:name=".ui.SettingActivity" android:launchMode="singleInstance"/>
 
         <provider
             android:name=".provider.TraceStartUpProvider"
             android:authorities="${applicationId}.traceProvider"
-            android:exported="false"></provider>
+            android:exported="false"/>
     </application>
 
 </manifest>

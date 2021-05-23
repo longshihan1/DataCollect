@@ -1,13 +1,19 @@
 package com.longshihan.collect.ui;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.support.v4.view.ViewConfigurationCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -15,15 +21,18 @@ import com.longshihan.collect.R;
 import com.longshihan.collect.apm.fps.ChoreographerHelp;
 import com.longshihan.collect.apm.fps.listener.FpsObserver;
 import com.longshihan.collect.init.TraceManager;
+import com.longshihan.collect.init.Utils;
 import com.longshihan.collect.utils.DensityUtil;
 
 @SuppressLint("AppCompatCustomView")
 public class FloatView extends TextView {
-    private float mTouchStartX;
-    private float mTouchStartY;
-    private float x;
-    private float y;
     boolean showBg;
+    private int lastX;
+    private int lastY;
+    private int screenHeight;
+    private int screenWidth;
+    //WindowManager.LayoutParams 的x坐标
+    private float lp_x;
 
     private WindowManager wm = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
     private WindowManager.LayoutParams params;
@@ -33,6 +42,8 @@ public class FloatView extends TextView {
         params = new WindowManager.LayoutParams(DensityUtil.INSTANCE.px2dip(TraceManager.mContext, 20)
                 , DensityUtil.INSTANCE.px2dip(TraceManager.mContext, 20));
         setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
+        screenHeight = Utils.getScreenHeight(getContext());
+        screenWidth = Utils.getScreenWidth(getContext());
         ChoreographerHelp.INSTANCE.addObserver(new FpsObserver() {
             @Override
             public void frameCallback(int count) {
@@ -41,29 +52,67 @@ public class FloatView extends TextView {
             }
         });
     }
+    private int startX, startY;
 
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //获取相对屏幕的坐标，即以屏幕左上角为原点
-        x = event.getRawX();
-        y = event.getRawY() - 25;   //25是系统状态栏的高度
-
-        switch (event.getAction()) {
+        //获取相对屏幕的X，Y
+        int rawX = (int) event.getRawX();
+        int rawY = (int) event.getRawY();
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                //获取相对View的坐标，即以此View左上角为原点
-                mTouchStartX = event.getX();
-                mTouchStartY = event.getY();
+                startX = lastX = rawX;
+                startY = lastY = rawY;
                 break;
             case MotionEvent.ACTION_MOVE:
-                updateViewPosition();
+                //计算手指移动的距离
+                float x = rawX - lastX;
+                float y = rawY - lastY;
+                if (getLayoutParams() instanceof WindowManager.LayoutParams) {
+                    params = (WindowManager.LayoutParams) getLayoutParams();
+                    //将移动距离累加到Lp中
+                    params.x += (int) x;
+                    params.y += (int) y;
+                    //将Lp设置给DragTableButton
+                    wm.updateViewLayout(this, params);
+                }
+                lastX = rawX;
+                lastY = rawY;
                 break;
-
+            case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                updateViewPosition();
-                mTouchStartX = mTouchStartY = 0;
+                int dx = (int) event.getRawX() - startX;
+                int dy = (int) event.getRawY() - startY;
+                if (Math.abs(dx) < 3 && Math.abs(dy) < 3) {
+                    performClick();//重点，确保DragFloatActionButton2.setOnclickListener生效
+                    break;
+                }
+                if (rawX >= screenWidth / 2) {
+                    //靠右吸附
+                    ObjectAnimator oa = ObjectAnimator.ofFloat(this, "lp_x", params.x, screenWidth - getWidth());
+                    oa.setInterpolator(new DecelerateInterpolator());
+                    oa.setDuration(500);
+                    oa.start();
+                } else {
+                    //靠左吸附
+                    ObjectAnimator oa = ObjectAnimator.ofFloat(this, "lp_x", params.x, 0);
+                    oa.setInterpolator(new DecelerateInterpolator());
+                    oa.setDuration(500);
+                    oa.start();
+                }
                 break;
         }
         return true;
+    }
+
+
+    public float getLp_x() {
+        return lp_x;
+    }
+
+    public void setLp_x(float lp_x) {
+        this.lp_x = lp_x;
+        params.x = (int) lp_x;
+        wm.updateViewLayout(this,params);
     }
 
     public void setTextStr(String value){
@@ -78,14 +127,6 @@ public class FloatView extends TextView {
         }else {
             setBackground(null);
         }
-    }
-
-    private void updateViewPosition() {
-        //更新浮动窗口位置参数
-        params.x = (int) (x - mTouchStartX);
-        params.y = (int) (y - mTouchStartY);
-        wm.updateViewLayout(this, params);
-
     }
 
     public void show() {
