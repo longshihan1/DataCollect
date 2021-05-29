@@ -28,7 +28,7 @@ public class AnrTrace extends LooperObserver implements IPlugin {
     private volatile LagHandleTask lagTask = new LagHandleTask();
     private static AnrTrace instance;
     private long[] queueTypeCosts = new long[3];
-    public static long evilThresholdMs = 700;
+    public static long evilThresholdMs = 1000;
 
     public static AnrTrace getInstance() {
         if (instance == null) {
